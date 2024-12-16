@@ -1,3 +1,4 @@
+//2 Tipos: Para cuando hace return,
 export interface Ingreso{
     id_ingreso:number,
     fk_id_cuenta: number,

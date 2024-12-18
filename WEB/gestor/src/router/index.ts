@@ -271,6 +271,34 @@ const router = createRouter({
       name: 'transaccionborrar',
       component: TransaccionBorrarVue,
     },
+
+
+
+    //Ruta del home
+    /*
+    {
+      path: '/home',
+      name: 'home',
+      component: HomeVue,
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: DashboardVue,
+    },
+    {
+      path: '/my_wallet',
+      name: 'my_wallet',
+      component: MyWalletVue,
+    },
+    {
+      path: '/recent_transactions',
+      name: 'recent_transactions',
+      component: RecentTransactionsVue,
+    },
+
+
+    */
   ],
 });
 

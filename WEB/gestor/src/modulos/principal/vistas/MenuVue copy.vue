@@ -2,7 +2,7 @@
   <!--=============== HEADER ===============-->
   <header class="header" id="header">
     <div class="header__container">
-      <RouterLink to="/home" class="header__logo">
+      <RouterLink to="/" class="header__logo">
         <i class="ri-cloud-fill"></i>
         <span>Cloud</span>
       </RouterLink>

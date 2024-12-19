@@ -5,7 +5,7 @@
             <!--Boton para agregar un nuevo registro-->
             <RouterLink :to = "{path: '/transaccion/agregar'}">
                 <button class="btn btn-sm boton_accion">
-                    Agregar <i class="fa fa-plus"></i>
+                    Add <i class="fa fa-plus"></i>
                 </button>
             </RouterLink>
             &nbsp;
@@ -14,9 +14,8 @@
                 Imprimir <i class="fa fa-print"></i>
             </button>
             &nbsp;-->
-            
             <!--Agregamos un boton nuevo para Excel-->
-            <button class="btn btn-sm btn-outline-primary boton_accion" v-if="transacciones.length > 0">
+            <button class="btn btn-sm boton_accion" v-if="transacciones.length > 0">
                 <download-excel :data="transacciones" type="xlsx" name="transaccion.xlsx">
                     Excel <i class="fa fa-file-excel-o"></i>
                 </download-excel>
@@ -33,12 +32,12 @@
         <!-- Mostrar las transacciones como bloques -->
         <div v-else v-for="(transaccion, index) in transacciones" :key="index" class="bloque-transaccion">
             <div class="bloque-detalle" id="tablaTransaccion">
-                <p><strong>ID:</strong> {{ transaccion.id_transaccion }}</p>
-                <p><strong>Cuenta Saliente: </strong>{{ transaccion.fk_id_cuenta_saliente }}</p>
-                <p><strong>Cuenta Entrante:</strong> {{ transaccion.fk_id_cuenta_entrante }}</p>
-                <p><strong>Descripción:</strong> {{ transaccion.descripcion }}</p>
-                <p><strong>Monto:</strong> {{ transaccion.monto }}</p>
-                <p><strong>Fecha:</strong> {{ dayjs(transaccion.fecha).format('DD-MM-YYYY') }}</p>
+                <!-- <p><strong>ID:</strong> {{ transaccion.id_transaccion }}</p> -->
+                <p><strong>Output Account: </strong>{{ transaccion.fk_id_cuenta_saliente }}</p>
+                <p><strong>Input Account: </strong> {{ transaccion.fk_id_cuenta_entrante }}</p>
+                <p><strong>Description: </strong> {{ transaccion.descripcion }}</p>
+                <p><strong>Amount: </strong> {{ transaccion.monto }}</p>
+                <p><strong>Date: </strong> {{ dayjs(transaccion.fecha).format('DD-MM-YYYY') }}</p>
             </div>
             <div class="bloque-acciones">
                 <button type="button" class="btn btn-sm btn-outline-primary">
@@ -247,44 +246,40 @@
         border: 1px solid #171717;
         box-shadow: 10px 10px 0px #666666;
     }
-
     .bloque-detalle {
         box-sizing: border-box;
-        font-size: 0.85rem;
+        font-size: 1.0rem;
         font-weight: bold;
         color: #333;
     }
-
     .bloque-acciones {
         box-sizing: border-box;
         display: flex;
         gap: 8px;
         justify-content: end;
     }
-
     .bloque-acciones button {
         font-size: 0.8rem;
         padding: 12px 18px;
     }
     /* From Uiverse.io by krlozCJ */ 
-.boton_accion {
-    box-sizing: border-box;
-  border: none;
-  outline: none;
-  background-color: #3f51b5;
-  padding: 10px 20px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-  border-radius: 5px;
-  transition: all ease 0.1s;
-  box-shadow: 0px 5px 0px 0px #024192;
-}
-
-.boton_accion:active {
-  transform: translateY(5px);
-  box-shadow: 0px 0px 0px 0px #024192;
-}
+    .boton_accion {
+        box-sizing: border-box;
+        border: none;
+        outline: none;
+        background-color: #3f51b5;
+        padding: 10px 20px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #024192;
+    }
+    .boton_accion:active {
+    transform: translateY(5px);
+    box-shadow: 0px 0px 0px 0px #024192;
+    }
 }
 
 @media screen and (min-width: 1150px) {
@@ -343,7 +338,7 @@
     }
     .bloque-detalle {
         box-sizing: border-box;
-        font-size: 0.85rem;
+        font-size: 1.1rem;
         font-weight: bold;
         color: #333;
         display: grid; /* Cambiamos de flexbox a grid */
@@ -364,22 +359,22 @@
     /* From Uiverse.io by krlozCJ */ 
     .boton_accion {
         box-sizing: border-box;
-  border: none;
-  outline: none;
-  background-color: #3f51b5;
-  padding: 10px 20px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-  border-radius: 5px;
-  transition: all ease 0.1s;
-  box-shadow: 0px 5px 0px 0px #024192;
+        border: none;
+        outline: none;
+        background-color: #3f51b5;
+        padding: 10px 20px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #024192;
 }
 
-.boton_accion:active {
-  transform: translateY(5px);
-  box-shadow: 0px 0px 0px 0px #024192;
-}
+    .boton_accion:active {
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #024192;
+    }
 }
 
 </style>

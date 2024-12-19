@@ -1,13 +1,13 @@
 <template>
     <div class="contedenor_padre" v-if="transacciones[0]">
         <div class="card">
-            <h4>Borrar Transacción</h4>
-            <div class="alert alert-warning mensaje_alerta" role="alert">
-                ¿Seguro que deseas borrar la información?
-                <i class="fa fa-warning"></i>
-            </div>
             <div class="contenedor_formulario">
                 <div class="formulario">
+                    <h4>Borrar Transacción</h4>
+                    <div class="alert alert-warning mensaje_alerta" role="alert">
+                        ¿Seguro que deseas borrar la información?
+                        <i class="fa fa-warning"></i>
+                    </div>
                     <div class="mb-3">
                     ID
                     <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->

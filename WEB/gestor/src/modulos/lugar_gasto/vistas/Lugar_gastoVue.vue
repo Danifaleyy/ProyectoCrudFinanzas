@@ -1,60 +1,51 @@
 <template>
-    <h3>LUGAR DE GASTO</h3>
+    <h3>Store</h3>
     <section class="contenedorinicio">
-        <div class="botones">
+        <div class="contenedor_botones">
             <RouterLink :to="{ path: '/lugar_gasto/agregar' }">
-                <button class="btn btn-sm btn-outline-primary">
+                <button class="btn btn-sm boton_accion">
                     Agregar <i class="fa fa-plus"></i>
                 </button>
             </RouterLink>
             &nbsp;
             <!--Boton para imprimir-->
-            <button @click.prevent="lugar_gastoPDF" class="btn btn-sm btn-outline-primary" v-if="lugar_gastos.length > 0">
+            <!--<button @click.prevent="lugar_gastoPDF" class="btn btn-sm btn-outline-primary" v-if="lugar_gastos.length > 0">
                 Imprimir <i class="fa fa-print"></i>
             </button>
-            &nbsp;
+            &nbsp;-->
             <!--Agregamos un boton nuevo para Excel-->
-            <button class="btn btn-sm btn-outline-primary" v-if="lugar_gastos.length > 0">
+            <button class="btn btn-sm boton_accion" v-if="lugar_gastos.length > 0">
                 <download-excel :data="lugar_gastos" type="xlsx" name="lugar_gastos.xlsx">
                     Excel <i class="fa fa-file-excel-o"></i>
                 </download-excel>
             </button>
         </div>
     </section>
-    <section class="ContenedorTabla">
-        <table class="desingtable" id="tablaLugar_gasto">
-        <thead class="thead-dark">
-            <tr>
-                <th class="icon-arrow">ID</th>
-                <th class="icon-arrow">Nombre</th>
-                <th class="icon-arrow">Botones de Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-if="lugar_gastos.length == 0">
-                <td colspan="3">Sin lugar_gasto registrados</td>
-            </tr>
-            <tr v-else v-for="(lugar_gasto, index) in lugar_gastos" :key="index">
-                <td>{{ lugar_gasto.id_lugar_gasto }}</td>
-                <td>{{ lugar_gasto.nombre }}</td>
-                <!--Botones para modificar y eliminar-->
-                <td class="centrado">
-                    <div class="btn-group" role="group" aria-label="Basic outlined example">
-                        <button type="button" class="btn btn-sm btn-outline-primary botonmodificar">
-                            <!--Boton modificar-->
-                            <RouterLink class="nav-link item" :to = "{path: '/lugar_gasto/'+ lugar_gasto.id_lugar_gasto + '/editar'}"><i class="fa fa-pencil"></i></RouterLink>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-danger botonborrar">
-                            <!--Boton eliminar-->
-                            <RouterLink class="nav-link item" :to = "{path: '/lugar_gasto/'+ lugar_gasto.id_lugar_gasto + '/borrar'}"><i class="fa fa-trash"></i></RouterLink>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    </section>
 
+    <section class="contenedor_section_tabla">
+        <!-- Si no hay transacciones, mostrar un mensaje -->
+        <div v-if="lugar_gastos.length == 0" class="no-registros">
+            Sin tienda registrada
+        </div>
+
+        <!-- Mostrar las transacciones como bloques -->
+        <div v-else v-for="(lugar_gasto, index) in lugar_gastos" :key="index" class="bloque-transaccion">
+            <div class="bloque-detalle" id="tablaTransaccion">
+                <!-- <p><strong>ID: </strong>{{ lugar_gasto.id_lugar_gasto }}</p> -->
+                <p><strong>Store: </strong>{{ lugar_gasto.nombre }}</p>
+            </div>
+            <div class="bloque-acciones">
+                <button type="button" class="btn btn-sm btn-outline-primary botonmodificar">
+                    <!--Boton modificar-->
+                    <RouterLink class="nav-link item" :to = "{path: '/lugar_gasto/'+ lugar_gasto.id_lugar_gasto + '/editar'}"><i class="fa fa-pencil"></i></RouterLink>
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-danger botonborrar">
+                    <!--Boton eliminar-->
+                    <RouterLink class="nav-link item" :to = "{path: '/lugar_gasto/'+ lugar_gasto.id_lugar_gasto + '/borrar'}"><i class="fa fa-trash"></i></RouterLink>
+                </button>
+            </div>
+        </div>
+    </section>
 </template>
 
 <script setup lang="ts">
@@ -88,157 +79,297 @@
 </script>
 
 <style scoped>
-.contenedorinicio {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;  /* Alinea verticalmente los elementos al centro */
-    margin-top: 0px;
-    gap: 20px;
-}
-.titulo {
-    text-align: left;
-}
-/* General */
-h3 {
-    color: #303f9f;
-    font-weight: bold;
-    font-size: 2.5rem; /* Ajusta el tamaño según lo que necesites */
-    padding: 0;
-    margin: 0;
-    margin-top: 20px;
-    text-align: center;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-    font-family: 'Roboto', sans-serif; /* O una fuente de tu preferencia */
-}
-
-
-.botones {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-}
-
-/* Diseño de la tabla */
-.ContenedorTabla {
-    width: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    margin: 0;
-}
-
-.desingtable {
-    width: 100%;
-    margin: 20px;
-    border-collapse: collapse;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-/* Estilo de las celdas de encabezado */
-th {
-    background-color: #3f51b5;
-    color: whitesmoke;
-    padding: 8px;  /* Reducido */
-    text-align: center;
-    font-size: 0.9rem; /* Reducido */
-    border: 1px solid #ddd;
-}
-
-/* Estilo de las filas */
-td {
-    padding: 8px;  /* Reducido */
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid #ddd;
-    font-size: 0.9rem;  /* Reducido */
-}
-
-/* Filas pares e impares */
-.desingtable tr:nth-child(even) {
-    background-color: #f1f8ff;
-}
-
-.desingtable tr:nth-child(odd) {
-    background-color: #e3f2fd;
-}
-
-/* Efecto hover en las filas */
-.desingtable tr:hover {
-    background-color: #bbdefb; /* Azul claro cuando el cursor pasa */
-}
-
-/* Botones dentro de la tabla */
-.btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-/* Estilo de los botones */
-button {
-    padding: 8px 12px;
-    font-size: 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-    background-color: #5c6bc0; /* Azul oscuro cuando el botón está en hover */
-    transform: scale(1.05); /* Efecto de agrandar el botón */
-}
-.botonborrar:hover {
-    background-color: #e57373; /* Azul oscuro cuando el botón está en hover */
-}
-
-.btn-outline-primary {
-    border: 1px solid #3f51b5;
-    color: #3f51b5;
-    background-color: transparent;
-}
-
-.btn-outline-danger {
-    border: 1px solid #e57373;
-    color: #e57373;
-    background-color: transparent;
-}
-
-button i {
-    margin-right: 8px;
-}
-
-/* Botones de acción */
-.botones .btn {
-    background-color: #3f51b5;
-    color: white;
-}
-
-.botones .btn:hover {
-    background-color: #03045e;
-}
-
-/* Estilo para los iconos */
-.icon-arrow {
-    background-color: #3f51b5;
-    color: whitesmoke;
-    padding: 8px;
-    border-radius: 5px;
-}
-
-/* Mensaje cuando no hay registros */
-.centrado {
-    text-align: center;
-    vertical-align: middle;
-    font-size: 1rem;  /* Reducido */
-    color: #555;
-    padding: 10px 0;
-}
-td{
-        font-weight: bold;
-        font-size: 1rem;
+    .btn-outline-primary {
+        box-sizing: border-box;
+        border: 1px solid #3f51b5;
+        color: #171717;
     }
+
+    .btn-outline-danger {
+        box-sizing: border-box;
+        border: 1px solid #e57373;
+        color: #171717;
+    }
+
+
+@media screen and (max-width: 450px) {
+    .contenedor_section {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        gap: 15px;
+    }
+    .contenedor_botones{
+        box-sizing: border-box;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .contenedor_section_tabla{
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 20px;
+    }
+    .bloque-transaccion {
+        box-sizing: border-box;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        padding: 1rem;
+        margin: 0px;
+        background-color: white;
+        border-radius: 25px;
+        transition: .4s ease-in-out;
+        box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+    }
+    .bloque-transaccion:hover {
+        box-sizing: border-box;
+        transform: translateX(-0.5em) translateY(-0.5em);
+        border: 1px solid #171717;
+        box-shadow: 10px 10px 0px #666666;
+    }
+
+    h3 {
+        box-sizing: border-box;
+        text-align: center;
+        color: #3f51b5;
+        font-weight: bold;
+        font-size: 2rem;
+    }
+    .bloque-detalle {
+        box-sizing: border-box;
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #333;
+    }
+    .bloque-acciones{
+        box-sizing: border-box;
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+    .bloque-acciones button {
+        box-sizing: border-box;
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        
+    }
+    /* From Uiverse.io by krlozCJ */ 
+    .boton_accion {
+        box-sizing: border-box;
+  border: none;
+  outline: none;
+  background-color: #3f51b5;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #024192;
+}
+
+.boton_accion:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #024192;
+}
+}
+
+
+@media screen and (max-width: 1149px) {
+    .contenedor_section {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        gap: 15px;
+    }
+    .contenedor_botones{
+        box-sizing: border-box;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .contenedor_section_tabla {
+        box-sizing: border-box;
+        display: grid; /* Cambiamos de flexbox a grid */
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajusta el número de columnas */
+        gap: 15px; /* Espacio entre tarjetas */
+        width: 100%;
+        padding: 10px;
+        justify-items: center;
+        align-items: start;
+    }
+    h3 {
+        box-sizing: border-box;
+        text-align: center;
+        color: #3f51b5;
+        font-weight: bold;
+        font-size: 2rem;
+    }
+    .bloque-transaccion {
+        box-sizing: border-box;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        padding: 1rem;
+        margin: 0px;
+        background-color: white;
+        border-radius: 25px;
+        transition: .4s ease-in-out;
+        box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+    }
+    .bloque-transaccion:hover {
+        transform: translateX(-0.5em) translateY(-0.5em);
+        border: 1px solid #171717;
+        box-shadow: 10px 10px 0px #666666;
+    }
+    .bloque-detalle {
+        box-sizing: border-box;
+        font-size: 1.0rem;
+        font-weight: bold;
+        color: #333;
+    }
+    .bloque-acciones {
+        box-sizing: border-box;
+        display: flex;
+        gap: 8px;
+        justify-content: end;
+    }
+    .bloque-acciones button {
+        font-size: 0.8rem;
+        padding: 12px 18px;
+    }
+    /* From Uiverse.io by krlozCJ */ 
+    .boton_accion {
+        box-sizing: border-box;
+        border: none;
+        outline: none;
+        background-color: #3f51b5;
+        padding: 10px 20px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #024192;
+    }
+    .boton_accion:active {
+    transform: translateY(5px);
+    box-shadow: 0px 0px 0px 0px #024192;
+    }
+}
+
+@media screen and (min-width: 1150px) {
+    .contenedor_section {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        gap: 15px;
+    }
+    .contenedor_botones{
+        box-sizing: border-box;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .contenedor_section_tabla {
+        box-sizing: border-box;
+        display: grid; /* Cambiamos de flexbox a grid */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajusta el número de columnas */
+        gap: 15px; /* Espacio entre tarjetas */
+        padding: 10px;
+        justify-items: center;
+        align-items: start;
+        margin-left: 100px;
+    }
+    h3 {
+        box-sizing: border-box;
+        text-align: center;
+        color: #3f51b5;
+        font-weight: bold;
+        font-size: 2rem;
+    }
+    .bloque-transaccion {
+        box-sizing: border-box;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        padding: 1rem;
+        margin: 0px;
+        background-color: white;
+        border-radius: 25px;
+        transition: .4s ease-in-out;
+        box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+    }
+    .bloque-transaccion:hover {
+        transform: translateX(-0.5em) translateY(-0.5em);
+        border: 1px solid #171717;
+        box-shadow: 10px 10px 0px #666666;
+    }
+    .bloque-detalle {
+        box-sizing: border-box;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+        display: grid; /* Cambiamos de flexbox a grid */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajusta el número de columnas */
+    }
+
+    .bloque-acciones {
+        box-sizing: border-box;
+        display: flex;
+        gap: 8px;
+        justify-content: end;
+    }
+
+    .bloque-acciones button {
+        font-size: 0.8rem;
+        padding: 12px 18px;
+    }
+    /* From Uiverse.io by krlozCJ */ 
+    .boton_accion {
+        box-sizing: border-box;
+        border: none;
+        outline: none;
+        background-color: #3f51b5;
+        padding: 10px 20px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #024192;
+}
+
+    .boton_accion:active {
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #024192;
+    }
+}
+
 </style>

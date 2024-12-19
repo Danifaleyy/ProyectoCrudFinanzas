@@ -1,12 +1,12 @@
 <template>
     <div class="contedenor_padre" v-if="transacciones[0]">
         <div class="card">
-            <h4>Editar Transacción</h4>
-            <div v-if="mensaje == 1" class="alert alert-success mensaje_alerta" role="alert" >
-                Datos actualizados con éxito
-            </div>
             <div class="contenedor_formulario">
                 <div class="formulario">
+                    <h4>Editar Transacción</h4>
+                    <div v-if="mensaje == 1" class="alert alert-success mensaje_alerta" role="alert" >
+                        Datos actualizados con éxito
+                    </div>
                     <div class="mb-3">
                     ID
                     <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->

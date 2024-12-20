@@ -36,11 +36,11 @@
             </div>
             
             <div class="bloque-acciones">
-                <button type="button" class="btn btn-sm btn-outline-primary botonmodificar">
+                <button type="button" class="boton_accion_botonmodificar">
                     <!--Boton modificar-->
                     <RouterLink class="nav-link item" :to = "{path: '/categoria_ingreso/'+ categoria_ingreso.id_categoria_ingreso + '/editar'}"><i class="fa fa-pencil"></i></RouterLink>
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-danger botonborrar">
+                <button type="button" class="boton_accion_botonborrar">
                     <!--Boton eliminar-->
                     <RouterLink class="nav-link item" :to = "{path: '/categoria_ingreso/'+ categoria_ingreso.id_categoria_ingreso + '/borrar'}"><i class="fa fa-trash"></i></RouterLink>
                 </button>
@@ -82,24 +82,12 @@
 
 
 <style scoped>
-    .btn-outline-primary {
-        box-sizing: border-box;
-        border: 1px solid #3f51b5;
-        color: #171717;
-    }
-
-    .btn-outline-danger {
-        box-sizing: border-box;
-        border: 1px solid #e57373;
-        color: #171717;
-    }
-
-
 @media screen and (max-width: 450px) {
+    
     .contenedor_section {
         box-sizing: border-box;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         margin-top: 0px;
@@ -114,30 +102,30 @@
         margin-top: 10px;
         margin-bottom: 20px;
     }
-    .contenedor_section_tabla{
+    .contenedor_section_tabla {
         box-sizing: border-box;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        row-gap: 20px;
+        display: grid; /* Cambiamos de flexbox a grid */
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajusta el número de columnas */
+        gap: 15px; /* Espacio entre tarjetas */
+        padding: 10px;
+        justify-items: stretch;
+        align-items: stretch;
+        margin-left: 0px;
     }
     .bloque-transaccion {
-        box-sizing: border-box;
-        width: 90%;
         display: flex;
         flex-direction: column;
-        gap: 0px;
+        margin: 0 auto;
+        height: 100%; /* Llenar toda la altura del contenedor */
+        width: 90%;
         padding: 1rem;
-        margin: 0px;
+        box-sizing: border-box;
         background-color: white;
         border-radius: 25px;
         transition: .4s ease-in-out;
         box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
     }
     .bloque-transaccion:hover {
-        box-sizing: border-box;
         transform: translateX(-0.5em) translateY(-0.5em);
         border: 1px solid #171717;
         box-shadow: 10px 10px 0px #666666;
@@ -168,7 +156,7 @@
         padding: 6px 12px;
         
     }
-    /* From Uiverse.io by krlozCJ */ 
+    
     .boton_accion {
         box-sizing: border-box;
         border: none;
@@ -182,14 +170,63 @@
         transition: all ease 0.1s;
         box-shadow: 0px 5px 0px 0px #024192;
     }
+
     .boton_accion:active {
         transform: translateY(5px);
         box-shadow: 0px 0px 0px 0px #024192;
     }
+
+    .boton_accion_botonmodificar{
+        box-sizing: border-box;
+        max-width: 50px;
+        max-height: 50px;
+        min-width: 25px;
+        min-height: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        background-color: #74c69d;
+        padding: none;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #40916c;
+    }
+    .boton_accion_botonmodificar:active {
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #40916c;
+    }
+
+    .boton_accion_botonborrar{
+        box-sizing: border-box;
+        max-width: 50px;
+        max-height: 50px;
+        min-width: 25px;
+        min-height: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        background-color: #ff97b7;
+        padding: none;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #ff5d8f;
+    }
+    .boton_accion_botonborrar:active {
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #ff5d8f;
+    }
+
 }
 
-
 @media screen and (max-width: 1149px) {
+    
+    
     .contenedor_section {
         box-sizing: border-box;
         display: flex;
@@ -212,11 +249,11 @@
         box-sizing: border-box;
         display: grid; /* Cambiamos de flexbox a grid */
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajusta el número de columnas */
-        gap: 15px; /* Espacio entre tarjetas */
-        width: 100%;
+        row-gap: 15px;
+        column-gap: 1px;
         padding: 10px;
-        justify-items: center;
-        align-items: start;
+        justify-items: stretch;
+        align-items: stretch;
     }
     h3 {
         box-sizing: border-box;
@@ -226,13 +263,13 @@
         font-size: 2rem;
     }
     .bloque-transaccion {
-        box-sizing: border-box;
-        width: 90%;
         display: flex;
         flex-direction: column;
-        gap: 0px;
+        margin: 0 auto;
+        height: 100%; /* Llenar toda la altura del contenedor */
+        width: 90%;
         padding: 1rem;
-        margin: 0px;
+        box-sizing: border-box;
         background-color: white;
         border-radius: 25px;
         transition: .4s ease-in-out;
@@ -259,7 +296,6 @@
         font-size: 0.8rem;
         padding: 12px 18px;
     }
-    /* From Uiverse.io by krlozCJ */ 
     .boton_accion {
         box-sizing: border-box;
         border: none;
@@ -273,9 +309,56 @@
         transition: all ease 0.1s;
         box-shadow: 0px 5px 0px 0px #024192;
     }
+
     .boton_accion:active {
-    transform: translateY(5px);
-    box-shadow: 0px 0px 0px 0px #024192;
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #024192;
+    }
+
+    .boton_accion_botonmodificar{
+        box-sizing: border-box;
+        max-width: 50px;
+        max-height: 50px;
+        min-width: 25px;
+        min-height: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        background-color: #74c69d;
+        padding: none;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #40916c;
+    }
+    .boton_accion_botonmodificar:active {
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #40916c;
+    }
+
+    .boton_accion_botonborrar{
+        box-sizing: border-box;
+        max-width: 50px;
+        max-height: 50px;
+        min-width: 25px;
+        min-height: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        background-color: #ff97b7;
+        padding: none;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #ff5d8f;
+    }
+    .boton_accion_botonborrar:active {
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #ff5d8f;
     }
 }
 
@@ -301,11 +384,12 @@
     .contenedor_section_tabla {
         box-sizing: border-box;
         display: grid; /* Cambiamos de flexbox a grid */
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajusta el número de columnas */
-        gap: 15px; /* Espacio entre tarjetas */
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajusta el número de columnas */
+        row-gap: 15px;
+        column-gap: 20px;
         padding: 10px;
-        justify-items: center;
-        align-items: start;
+        justify-items: stretch;
+        align-items: stretch;
         margin-left: 100px;
     }
     h3 {
@@ -316,13 +400,11 @@
         font-size: 2rem;
     }
     .bloque-transaccion {
-        box-sizing: border-box;
-        width: 90%;
         display: flex;
         flex-direction: column;
-        gap: 0px;
+        height: 100%; /* Llenar toda la altura del contenedor */
         padding: 1rem;
-        margin: 0px;
+        box-sizing: border-box;
         background-color: white;
         border-radius: 25px;
         transition: .4s ease-in-out;
@@ -353,7 +435,6 @@
         font-size: 0.8rem;
         padding: 12px 18px;
     }
-    /* From Uiverse.io by krlozCJ */ 
     .boton_accion {
         box-sizing: border-box;
         border: none;
@@ -366,11 +447,57 @@
         border-radius: 5px;
         transition: all ease 0.1s;
         box-shadow: 0px 5px 0px 0px #024192;
-}
+    }
 
     .boton_accion:active {
         transform: translateY(5px);
         box-shadow: 0px 0px 0px 0px #024192;
+    }
+
+    .boton_accion_botonmodificar{
+        box-sizing: border-box;
+        max-width: 50px;
+        max-height: 50px;
+        min-width: 25px;
+        min-height: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        background-color: #74c69d;
+        padding: none;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #40916c;
+    }
+    .boton_accion_botonmodificar:active {
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #40916c;
+    }
+
+    .boton_accion_botonborrar{
+        box-sizing: border-box;
+        max-width: 50px;
+        max-height: 50px;
+        min-width: 25px;
+        min-height: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        background-color: #ff97b7;
+        padding: none;
+        border-radius: 5px;
+        transition: all ease 0.1s;
+        box-shadow: 0px 5px 0px 0px #ff5d8f;
+    }
+    .boton_accion_botonborrar:active {
+        transform: translateY(5px);
+        box-shadow: 0px 0px 0px 0px #ff5d8f;
     }
 }
 

@@ -65,6 +65,7 @@ watch(
 };
 </script>
 
+
 <style scoped>
     .errorValidacion {
         color: red;
@@ -188,23 +189,20 @@ watch(
             width: 100%;
         }
         .formulario{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             margin: 0 auto;
             margin-top: 30px;
-            width: 90%;
+            max-width: 500px;
             font-size: 1rem;
             color: black;
             font-weight: bold;
-        }
-        /* From Uiverse.io by Praashoo7 */ 
-        .formulario{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        background-color: white;
-        padding: 2.5em;
-        border-radius: 25px;
-        transition: .4s ease-in-out;
-        box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+            background-color: white;
+            padding: 2.5em;
+            border-radius: 25px;
+            transition: .4s ease-in-out;
+            box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
         }
         .formulario:hover {
         transform: translateX(-0.5em) translateY(-0.5em);
@@ -280,23 +278,20 @@ watch(
             width: 100%;
         }
         .formulario{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             margin: 0 auto;
             margin-top: 30px;
-            width: 90%;
+            max-width: 600px;
             font-size: 1rem;
             color: black;
             font-weight: bold;
-        }
-        /* From Uiverse.io by Praashoo7 */ 
-        .formulario{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        background-color: white;
-        padding: 2.5em;
-        border-radius: 25px;
-        transition: .4s ease-in-out;
-        box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+            background-color: white;
+            padding: 2.5em;
+            border-radius: 25px;
+            transition: .4s ease-in-out;
+            box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
         }
         .formulario:hover {
         transform: translateX(-0.5em) translateY(-0.5em);

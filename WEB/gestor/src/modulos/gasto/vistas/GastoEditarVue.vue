@@ -14,18 +14,30 @@
                     </div>
                     <div class="mb-3">
                         Account:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <input type="number" class="form-control" v-model="gastos[0].fk_id_cuenta">
+                        <!-- Sustituimos el input por un menú desplegable -->
+                        <select name="fk_id_cuenta" class="form-control campo_input" v-model="gastos[0].fk_id_cuenta">
+                            <option v-for="cuenta in cuentas" :key="cuenta.id_cuenta" :value="cuenta.id_cuenta">
+                            {{ cuenta.nombre }}
+                            </option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         Spent Category:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <input type="number" class="form-control" v-model="gastos[0].fk_id_categoria_gasto">
+                        <!-- Sustituimos el input por un menú desplegable -->
+                        <select name="fk_id_categoria_gasto" class="form-control campo_input" v-model="gastos[0].fk_id_categoria_gasto">
+                            <option v-for="categoria in categorias" :key="categoria.id_categoria_gasto" :value="categoria.id_categoria_gasto">
+                                {{ categoria.nombre }}
+                            </option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         Store:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <input type="number" class="form-control" v-model="gastos[0].fk_id_lugar_gasto">
+                        <!-- Sustituimos el input por un menú desplegable -->
+                        <select name="fk_id_lugar_gasto" class="form-control campo_input" v-model="gastos[0].fk_id_lugar_gasto">
+                            <option v-for="lugar_gasto in lugar_gastos" :key="lugar_gasto.id_lugar_gasto" :value="lugar_gasto.id_lugar_gasto">
+                            {{ lugar_gasto.nombre }}
+                            </option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         Description:
@@ -53,7 +65,7 @@
                         <input type="number" class="form-control" v-model="gastos[0].fk_id_hecho_gasto">
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-primary boton_submit" @click="actualizarGasto(gastos[0])">Actualizar</button>
+                        <button class="btn btn-primary boton_submit" @click="actualizarGasto(gastos[0])">Update</button>
                     </div>
                 </div>
             </div>
@@ -66,15 +78,77 @@
 </template>
 
 <script setup lang="ts">
+
 import { ref } from 'vue';
 import { useGasto } from '../controladores/useGasto';
 const { traeGastoId, actualizarGasto, mensaje, gastos } = useGasto()
 let idGasto = 0
 const route = useRoute()
 
+
+
+// Variables para las cuentas
+const lugar_gastos = ref<{ id_lugar_gasto: number; nombre: string }[]>([]);
+  
+  // Función para obtener cuentas del backend
+  const fetchLugar = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/api/lugar_gasto/');
+      lugar_gastos.value = response.data;
+    } catch (error) {
+      console.error('Error al obtener las cuentas:', error);
+    }
+  };
+
+
+
+
+
+  // Variables para las cuentas
+  const cuentas = ref<{ id_cuenta: number; nombre: string }[]>([]);
+  
+  // Función para obtener cuentas del backend
+  const fetchCuentas = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/api/cuenta/');
+      cuentas.value = response.data;
+    } catch (error) {
+      console.error('Error al obtener las cuentas:', error);
+    }
+  };
+
+
+
+// ------------------------------
+// Traer menu en cateogria gasto
+// Variables para las categorías
+const categorias = ref<{ id_categoria_gasto: number; nombre: string }[]>([]);
+
+// Función para obtener categorías del backend
+const fetchCategorias = async () => {
+    try {
+        const response = await axios.get('http://localhost:3001/api/categoria_gasto/');
+        categorias.value = response.data;
+    } catch (error) {
+        console.error('Error al obtener las categorías:', error);
+    }
+};
+// Cargar el ingreso por ID y las categorías disponibles
+onMounted(async () => {
+    idGasto = Number(route.params.id_gasto);
+    await traeGastoId(idGasto); // Cargar datos del ingreso
+    await fetchCategorias(); // Cargar las categorías
+    await fetchCuentas(); // Cargar las cuentas
+    await fetchLugar(); // Cargar las cuentas
+});
+// ------------------------------
+
+
+
 //-----------------Redirigiendo al usuario a la pagina de inicio
 import { onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
 //-----------------
 const routeRedirect = useRouter();
 watch(
@@ -92,6 +166,8 @@ onMounted(async() => {
     idGasto = Number(route.params.id_gasto);
     await traeGastoId(Number(idGasto))
 })
+
+
 </script>
 
 

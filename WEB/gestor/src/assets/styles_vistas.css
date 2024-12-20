@@ -1,85 +1,3 @@
-<template>
-    <h3>Store</h3>
-    <section class="contenedorinicio">
-        <div class="contenedor_botones">
-            <RouterLink :to="{ path: '/lugar_gasto/agregar' }">
-                <button class="btn btn-sm boton_accion">
-                    Add <i class="fa fa-plus"></i>
-                </button>
-            </RouterLink>
-            &nbsp;
-            <!--Boton para imprimir-->
-            <!--<button @click.prevent="lugar_gastoPDF" class="btn btn-sm btn-outline-primary" v-if="lugar_gastos.length > 0">
-                Imprimir <i class="fa fa-print"></i>
-            </button>
-            &nbsp;-->
-            <!--Agregamos un boton nuevo para Excel-->
-            <button class="btn btn-sm boton_accion" v-if="lugar_gastos.length > 0">
-                <download-excel :data="lugar_gastos" type="xlsx" name="lugar_gastos.xlsx">
-                    Excel <i class="fa fa-file-excel-o"></i>
-                </download-excel>
-            </button>
-        </div>
-    </section>
-
-    <section class="contenedor_section_tabla">
-        <!-- Si no hay transacciones, mostrar un mensaje -->
-        <div v-if="lugar_gastos.length == 0" class="no-registros">
-            Sin tienda registrada
-        </div>
-
-        <!-- Mostrar las transacciones como bloques -->
-        <div v-else v-for="(lugar_gasto, index) in lugar_gastos" :key="index" class="bloque-transaccion">
-            <div class="bloque-detalle" id="tablaTransaccion">
-                <!-- <p><strong>ID: </strong>{{ lugar_gasto.id_lugar_gasto }}</p> -->
-                <p><strong>Store: </strong>{{ lugar_gasto.nombre }}</p>
-            </div>
-            <div class="bloque-acciones">
-                <button type="button" class="boton_accion_botonmodificar">
-                    <!--Boton modificar-->
-                    <RouterLink class="nav-link item" :to = "{path: '/lugar_gasto/'+ lugar_gasto.id_lugar_gasto + '/editar'}"><i class="fa fa-pencil"></i></RouterLink>
-                </button>
-                <button type="button" class="boton_accion_botonborrar">
-                    <!--Boton eliminar-->
-                    <RouterLink class="nav-link item" :to = "{path: '/lugar_gasto/'+ lugar_gasto.id_lugar_gasto + '/borrar'}"><i class="fa fa-trash"></i></RouterLink>
-                </button>
-            </div>
-        </div>
-    </section>
-</template>
-
-<script setup lang="ts">
-    // Importar para imprimir página en PDF
-    import html2PDF from 'jspdf-html2canvas';
-    import { onMounted } from 'vue';
-    import { useLugar_gasto } from '../controladores/useLugar_gasto';
-
-    const { traeLugar_gasto, lugar_gastos } = useLugar_gasto();
-
-    // Cuando la página es visible y está cargada
-    onMounted(async () => {
-        await traeLugar_gasto();  // Llamar a la función que obtiene los datos
-    });
-
-    const lugar_gastoPDF = async () => {
-        const pagina = document.getElementById('tablaLugar_gasto'); // Asegúrate que el ID sea correcto
-        if (!pagina) {
-            console.error("Elemento 'tablaLugar_gasto' no encontrado.");
-            return;
-        }
-
-        await html2PDF(pagina, {
-            jsPDF: {
-                format: 'a4',
-            },
-            imageType: 'image/jpeg',
-            output: 'lugar_gasto.pdf',
-        });
-    };
-</script>
-
-
-<style scoped>
 
 @media screen and (max-width: 450px) {
     
@@ -403,7 +321,7 @@
         padding: 10px;
         justify-items: stretch;
         align-items: stretch;
-        margin-left: 120px;
+        margin-left: 100px;
     }
     h3 {
         box-sizing: border-box;
@@ -520,4 +438,3 @@
         box-shadow: 0px 0px 0px 0px #ff5d8f;
     }
 }
-</style>

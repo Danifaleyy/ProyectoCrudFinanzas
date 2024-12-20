@@ -59,4 +59,11 @@ router.delete('/', async (req: Request, res: Response) => {
     }
 });
 
+//Obtener una categoria de ingreso
+router.get('/', async (_req: Request, res: Response) => {
+    const categorias = await categoria_ingresoServices.obtieneCategoriaIngreso();
+    res.send(categorias);
+});
+
+
 export default router;

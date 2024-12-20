@@ -59,4 +59,10 @@ router.delete('/', async (req: Request, res: Response) => {
     }
 });
 
+//Obtener una cuenta
+router.get('/', async (_req: Request, res: Response) => {
+    const lugar_gastos = await lugar_gastoServices.obtieneLugarGasto();
+    res.send(lugar_gastos);
+});
+
 export default router;

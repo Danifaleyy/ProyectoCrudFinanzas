@@ -59,4 +59,9 @@ router.delete('/', async (req: Request, res: Response) => {
     }
 });
 
+//Obtener un tipo de gasto: Necesario o innecesario
+router.get('/', async (_req: Request, res: Response) => {
+    const tipo_gastos = await tipo_gastoServices.obtieneTipoGasto();
+    res.send(tipo_gastos);
+});
 export default router;

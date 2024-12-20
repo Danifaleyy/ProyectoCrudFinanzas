@@ -9,63 +9,96 @@
                     </div>
                     <div class="mb-3">
                         Account:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <Field name="fk_id_cuenta" type="number" class="form-control campo_input" v-model="ingreso.fk_id_cuenta"/>
+                        <!-- Aquí sustituimos el input de número por un menú desplegable -->
+                        <select name="fk_id_cuenta" class="form-control campo_input" v-model="ingreso.fk_id_cuenta">
+                            <option v-for="cuenta in cuentas" :key="cuenta.id_cuenta" :value="cuenta.id_cuenta">
+                                {{ cuenta.nombre }}
+                            </option>
+                        </select>
                         <ErrorMessage name="fk_id_cuenta" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         Income Category:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <Field name="fk_id_categoria_ingreso" type="number" class="form-control campo_input" v-model="ingreso.fk_id_categoria_ingreso"/>
+                        <!-- Aquí sustituimos el input de número por un menú desplegable -->
+                        <select name="fk_id_categoria_ingreso" class="form-control campo_input" v-model="ingreso.fk_id_categoria_ingreso">
+                            <option v-for="categoria in categorias" :key="categoria.id_categoria_ingreso" :value="categoria.id_categoria_ingreso">
+                                {{ categoria.nombre }}
+                            </option>
+                        </select>
                         <ErrorMessage name="fk_id_categoria_ingreso" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         Description:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <Field name="descripcion" type="text" class="form-control campo_input" v-model="ingreso.descripcion"/>
                         <ErrorMessage name="descripcion" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         Amount:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <Field name="monto" type="number" class="form-control campo_input" v-model="ingreso.monto"/>
                         <ErrorMessage name="monto" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         Date:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <Field name="fecha_operacion" type="date" class="form-control campo_input" v-model="ingreso.fecha_operacion"/>
                         <ErrorMessage name="fecha_operacion" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
-                        <!--<Field name="nombre" button class="btn btn-primary" @click="agregarIngreso(ingreso)">Agregar</Field>-->
                         <button class="btn btn-primary boton_submit" type="submit">Add</button>
                     </div>
                 </Form>
             </div>
-
-                
-            </div>
         </div>
+    </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import type { IngresoAgregar } from '../interfaces/ingreso-interfaces';
 import { useIngreso } from '../controladores/useIngreso';
-const { agregarIngreso, mensaje } = useIngreso()
-import { IngresoSchema } from '../schemas/IngresoSchema';
 import { Field, Form, ErrorMessage } from 'vee-validate';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
-
-//-----------------Redirigiendo al usuario a la pagina de inicio
-//Importamos watch para redirlo y se elimina ref
-import { onMounted, watch } from 'vue';
-//Importamos useRouter para redirlo
-import { useRoute, useRouter } from 'vue-router';
-//-----------------
-//Nuevo: redirigirlo a la pagina de inicio de ingreso
+const { agregarIngreso, mensaje } = useIngreso();
 const routeRedirect = useRouter();
+
+
+// ------------------------------
+// Variables para las categorías
+const cuentas = ref<{ id_cuenta: number; nombre: string }[]>([]);
+
+// Obtener categorías desde el backend al montar el componente
+const fetchCuenta = async () => {
+    try {
+        const response = await axios.get('http://localhost:3001/api/cuenta/');
+        cuentas.value = response.data; // Guardar categorías en la variable reactiva
+    } catch (error) {
+        console.error('Error al obtener las cuentas:', error);
+    }
+};
+
+// Llamamos a fetchCategorias al montar el componente
+onMounted(fetchCuenta);
+
+
+
+// ------------------------------
+// Variables para las categorías
+const categorias = ref<{ id_categoria_ingreso: number; nombre: string }[]>([]);
+
+// Obtener categorías desde el backend al montar el componente
+const fetchCategorias = async () => {
+    try {
+        const response = await axios.get('http://localhost:3001/api/categoria_ingreso/');
+        categorias.value = response.data; // Guardar categorías en la variable reactiva
+    } catch (error) {
+        console.error('Error al obtener las categorías:', error);
+    }
+};
+
+// Llamamos a fetchCategorias al montar el componente
+onMounted(fetchCategorias);
+// ------------------------------
 // Observa cambios en `mensaje` para mostrar el mensaje y luego redirigir
 watch(
     () => mensaje.value,
@@ -77,21 +110,22 @@ watch(
         }
     }
 );
-//-----------------
 
-
+// Variable para el formulario
 let ingreso = ref<IngresoAgregar>({
     fk_id_cuenta: 0,
-    fk_id_categoria_ingreso: 0,
+    fk_id_categoria_ingreso: 0, // Será modificado por el menú desplegable
     descripcion: '',
     monto: 0,
     fecha_operacion: new Date()
 });
 
+// Función para manejar el envío del formulario
 const onTodoBien = async () => {
     await agregarIngreso(ingreso.value);
-}
+};
 </script>
+
 
 
 <style scoped>

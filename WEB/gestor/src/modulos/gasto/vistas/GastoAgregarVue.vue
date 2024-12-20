@@ -9,26 +9,42 @@
                     </div>
                     <div class="mb-3">
                         Account:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <Field name="fk_id_cuenta" type="number" class="form-control campo_input" v-model="gasto.fk_id_cuenta"/>
+                        <!-- Aquí sustituimos el input de número por un menú desplegable -->
+                        <select name="fk_id_cuenta" class="form-control campo_input" v-model="gasto.fk_id_cuenta">
+                            <option v-for="cuenta in cuentas" :key="cuenta.id_cuenta" :value="cuenta.id_cuenta">
+                                {{ cuenta.nombre }}
+                            </option>
+                        </select>
                         <ErrorMessage name="fk_id_cuenta" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         Spent Category:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <Field name="fk_id_categoria_gasto" type="number" class="form-control campo_input" v-model="gasto.fk_id_categoria_gasto"/>
+                        <!-- Aquí sustituimos el input de número por un menú desplegable -->
+                        <select name="fk_id_categoria_gasto" class="form-control campo_input" v-model="gasto.fk_id_categoria_gasto">
+                            <option v-for="categoria in categorias" :key="categoria.id_categoria_gasto" :value="categoria.id_categoria_gasto">
+                                {{ categoria.nombre }}
+                            </option>
+                        </select>
                         <ErrorMessage name="fk_id_categoria_gasto" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         Spent Type:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <Field name="fk_id_tipo_gasto" type="number" class="form-control campo_input" v-model="gasto.fk_id_tipo_gasto"/>
+                        <!-- Aquí sustituimos el input de número por un menú desplegable -->
+                        <select name="fk_id_tipo_gasto" class="form-control campo_input" v-model="gasto.fk_id_tipo_gasto">
+                            <option v-for="tipo_gasto in tipo_gastos" :key="tipo_gasto.id_tipo_gasto" :value="tipo_gasto.id_tipo_gasto">
+                                {{ tipo_gasto.nombre }}
+                            </option>
+                        </select>
                         <ErrorMessage name="fk_id_tipo_gasto" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         Store:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <Field name="fk_id_lugar_gasto" type="number" class="form-control campo_input" v-model="gasto.fk_id_lugar_gasto"/>
+                        <!-- Aquí sustituimos el input de número por un menú desplegable -->
+                        <select name="fk_id_lugar_gasto" class="form-control campo_input" v-model="gasto.fk_id_lugar_gasto">
+                            <option v-for="lugar_gasto in lugar_gastos" :key="lugar_gasto.id_lugar_gasto" :value="lugar_gasto.id_lugar_gasto">
+                                {{ lugar_gasto.nombre }}
+                            </option>
+                        </select>
                         <ErrorMessage name="fk_id_lugar_gasto" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
@@ -74,15 +90,91 @@
 import { ref } from 'vue';
 import type { GastoAgregar } from '../interfaces/gasto-interfaces';
 import { useGasto } from '../controladores/useGasto';
-const { agregarGasto, mensaje } = useGasto()
 import { GastoSchema } from '../schemas/GastoSchema';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 
 //-----------------Redirigiendo al usuario a la página de inicio
 import { onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
 //-----------------
+const { agregarGasto, mensaje } = useGasto()
 const routeRedirect = useRouter();
+
+
+// Variables para las categorías
+const tipo_gastos = ref<{ id_tipo_gasto: number; nombre: string }[]>([]);
+
+// Obtener categorías desde el backend al montar el componente
+const fetchTipo = async () => {
+    try {
+        const response = await axios.get('http://localhost:3001/api/tipo_gasto/');
+        tipo_gastos.value = response.data; // Guardar categorías en la variable reactiva
+    } catch (error) {
+        console.error('Error al obtener las tipo_gasto:', error);
+    }
+};
+
+// Llamamos a fetchCategorias al montar el componente
+onMounted(fetchTipo);
+
+
+
+// ------------------------------
+// Variables para las categorías
+const lugar_gastos = ref<{ id_lugar_gasto: number; nombre: string }[]>([]);
+
+// Obtener categorías desde el backend al montar el componente
+const fetchLugar = async () => {
+    try {
+        const response = await axios.get('http://localhost:3001/api/lugar_gasto/');
+        lugar_gastos.value = response.data; // Guardar categorías en la variable reactiva
+    } catch (error) {
+        console.error('Error al obtener las lugar_gasto:', error);
+    }
+};
+
+// Llamamos a fetchCategorias al montar el componente
+onMounted(fetchLugar);
+
+
+// ------------------------------
+// Variables para las categorías
+const cuentas = ref<{ id_cuenta: number; nombre: string }[]>([]);
+
+// Obtener categorías desde el backend al montar el componente
+const fetchCuenta = async () => {
+    try {
+        const response = await axios.get('http://localhost:3001/api/cuenta/');
+        cuentas.value = response.data; // Guardar categorías en la variable reactiva
+    } catch (error) {
+        console.error('Error al obtener las cuentas:', error);
+    }
+};
+
+// Llamamos a fetchCategorias al montar el componente
+onMounted(fetchCuenta);
+
+
+// ------------------------------
+// Variables para las categorías
+const categorias = ref<{ id_categoria_gasto: number; nombre: string }[]>([]);
+
+// Obtener categorías desde el backend al montar el componente
+const fetchCategorias = async () => {
+    try {
+        const response = await axios.get('http://localhost:3001/api/categoria_gasto/');
+        categorias.value = response.data; // Guardar categorías en la variable reactiva
+    } catch (error) {
+        console.error('Error al obtener las categorías:', error);
+    }
+};
+
+// Llamamos a fetchCategorias al montar el componente
+onMounted(fetchCategorias);
+// ------------------------------
+
+
 // Observa cambios en `mensaje` para mostrar el mensaje y luego redirigir
 watch(
     () => mensaje.value,
@@ -112,6 +204,7 @@ const onTodoBien = async () => {
     await agregarGasto(gasto.value);
 }
 </script>
+
 
 
 <style scoped>

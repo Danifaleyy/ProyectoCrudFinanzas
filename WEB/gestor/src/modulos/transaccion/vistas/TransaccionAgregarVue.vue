@@ -9,15 +9,23 @@
                     </div>
                     <div class="mb-3">
                         Output Account:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <Field name="fk_id_cuenta_saliente" type="number" class="form-control campo_input" v-model="transaccion.fk_id_cuenta_saliente" />
-                        <ErrorMessage name="fk_id_cuenta_saliente" class="errorValidacion" />
+                        <!-- Aquí sustituimos el input de número por un menú desplegable -->
+                        <select name="fk_id_cuenta" class="form-control campo_input " v-model="transaccion.fk_id_cuenta_saliente">
+                            <option v-for="cuenta in cuentas" :key="cuenta.id_cuenta" :value="cuenta.id_cuenta">
+                                {{ cuenta.nombre }}
+                            </option>
+                        </select>
+                        <ErrorMessage name="fk_id_cuenta" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         Input Account:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <Field name="fk_id_cuenta_entrante" type="number" class="form-control campo_input" v-model="transaccion.fk_id_cuenta_entrante" />
-                        <ErrorMessage name="fk_id_cuenta_entrante" class="errorValidacion" />
+                        <!-- Aquí sustituimos el input de número por un menú desplegable -->
+                        <select name="fk_id_cuenta" class="form-control campo_input" v-model="transaccion.fk_id_cuenta_entrante">
+                            <option v-for="cuenta in cuentas" :key="cuenta.id_cuenta" :value="cuenta.id_cuenta">
+                                {{ cuenta.nombre }}
+                            </option>
+                        </select>
+                        <ErrorMessage name="fk_id_cuenta" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         Description: 
@@ -59,9 +67,30 @@ import { Field, Form, ErrorMessage } from 'vee-validate';
 import { onMounted, watch } from 'vue';
 //Importamos useRouter para redirigirlo
 import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
 //-----------------
 //Nuevo: redirigirlo a la página de inicio de transacciones
 const routeRedirect = useRouter();
+
+
+// ------------------------------
+// Variables para las categorías
+const cuentas = ref<{ id_cuenta: number; nombre: string }[]>([]);
+
+// Obtener categorías desde el backend al montar el componente
+const fetchCuenta = async () => {
+    try {
+        const response = await axios.get('http://localhost:3001/api/cuenta/');
+        cuentas.value = response.data; // Guardar categorías en la variable reactiva
+    } catch (error) {
+        console.error('Error al obtener las cuentas:', error);
+    }
+};
+
+// Llamamos a fetchCategorias al montar el componente
+onMounted(fetchCuenta);
+
+
 // Observa cambios en `mensaje` para mostrar el mensaje y luego redirigir
 watch(
     () => mensaje.value,
@@ -90,6 +119,13 @@ const onTodoBien = async () => {
 
 
 <style scoped>
+    select{
+        font-weight: bold;
+    }
+    select.form-control option {
+    color: #3f51b5;
+    font-weight: bold;
+    }
     .errorValidacion {
         color: red;
         font-weight: bold;

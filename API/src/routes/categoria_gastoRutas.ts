@@ -59,4 +59,11 @@ router.delete('/', async (req: Request, res: Response) => {
     }
 });
 
+
+//Obtener una categoria de gasto
+router.get('/', async (_req: Request, res: Response) => {
+    const categorias = await categoria_gastoServices.obtieneCategoriaGasto();
+    res.send(categorias);
+});
+
 export default router;

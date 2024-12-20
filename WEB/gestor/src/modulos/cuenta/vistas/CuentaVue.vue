@@ -78,6 +78,7 @@
 
 
 <style scoped>
+
 @media screen and (max-width: 450px) {
     
     .contenedor_section {
@@ -176,8 +177,6 @@
         box-sizing: border-box;
         max-width: 50px;
         max-height: 50px;
-        min-width: 25px;
-        min-height: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -194,13 +193,22 @@
         transform: translateY(5px);
         box-shadow: 0px 0px 0px 0px #40916c;
     }
-
+    .fa-pencil{
+        width: 100%;
+        height: 100%;
+    }
+    .ri-delete-bin-fill{
+        width: 100%;
+        height: 100%;
+    }
+    .nav-link{
+        color: #3f51b5;
+        font-weight: bold;
+    }
     .boton_accion_botonborrar{
         box-sizing: border-box;
         max-width: 50px;
         max-height: 50px;
-        min-width: 25px;
-        min-height: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -315,8 +323,6 @@
         box-sizing: border-box;
         max-width: 50px;
         max-height: 50px;
-        min-width: 25px;
-        min-height: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -333,13 +339,22 @@
         transform: translateY(5px);
         box-shadow: 0px 0px 0px 0px #40916c;
     }
-
+    .fa-pencil{
+        width: 100%;
+        height: 100%;
+    }
+    .ri-delete-bin-fill{
+        width: 100%;
+        height: 100%;
+    }
+    .nav-link{
+        color: #3f51b5;
+        font-weight: bold;
+    }
     .boton_accion_botonborrar{
         box-sizing: border-box;
         max-width: 50px;
         max-height: 50px;
-        min-width: 25px;
-        min-height: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -386,7 +401,7 @@
         padding: 10px;
         justify-items: stretch;
         align-items: stretch;
-        margin-left: 100px;
+        margin-left: 120px;
     }
     h3 {
         box-sizing: border-box;
@@ -454,8 +469,6 @@
         box-sizing: border-box;
         max-width: 50px;
         max-height: 50px;
-        min-width: 25px;
-        min-height: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -472,13 +485,22 @@
         transform: translateY(5px);
         box-shadow: 0px 0px 0px 0px #40916c;
     }
-
+    .fa-pencil{
+        width: 100%;
+        height: 100%;
+    }
+    .ri-delete-bin-fill{
+        width: 100%;
+        height: 100%;
+    }
+    .nav-link{
+        color: #3f51b5;
+        font-weight: bold;
+    }
     .boton_accion_botonborrar{
         box-sizing: border-box;
         max-width: 50px;
         max-height: 50px;
-        min-width: 25px;
-        min-height: 25px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -496,5 +518,4 @@
         box-shadow: 0px 0px 0px 0px #ff5d8f;
     }
 }
-
 </style>

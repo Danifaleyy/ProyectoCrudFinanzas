@@ -14,13 +14,21 @@
                     </div>
                     <div class="mb-3">
                         Output Account:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <input type="number" class="form-control" v-model="transacciones[0].fk_id_cuenta_saliente">
+                        <!-- Sustituimos el input por un menú desplegable -->
+                        <select name="fk_id_cuenta" class="form-control campo_input" v-model="transacciones[0].fk_id_cuenta_saliente">
+                            <option v-for="cuenta in cuentas" :key="cuenta.id_cuenta" :value="cuenta.id_cuenta">
+                            {{ cuenta.nombre }}
+                            </option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         Input Account:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <input type="number" class="form-control" v-model="transacciones[0].fk_id_cuenta_entrante">
+                        <!-- Sustituimos el input por un menú desplegable -->
+                        <select name="fk_id_cuenta" class="form-control campo_input" v-model="transacciones[0].fk_id_cuenta_entrante">
+                            <option v-for="cuenta in cuentas" :key="cuenta.id_cuenta" :value="cuenta.id_cuenta">
+                            {{ cuenta.nombre }}
+                            </option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         Description:
@@ -59,6 +67,7 @@ const route = useRoute()
 import { onMounted, watch  } from 'vue';
 //Importamos useRouter para redirigirlo
 import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
 //-----------------
 //Nuevo: redirigirlo a la pagina de inicio de transacción
 const routeRedirect = useRouter();
@@ -75,10 +84,23 @@ watch(
 );
 //-----------------
 
+// Variables para las cuentas
+const cuentas = ref<{ id_cuenta: number; nombre: string }[]>([]);
+  
+  // Función para obtener cuentas del backend
+  const fetchCuentas = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/api/cuenta/');
+      cuentas.value = response.data;
+    } catch (error) {
+      console.error('Error al obtener las cuentas:', error);
+    }
+  };
 
 onMounted(async() => {
     idTransaccion = Number(route.params.id_transaccion);
-    await traeTransaccionId(Number(idTransaccion))
+    await traeTransaccionId(Number(idTransaccion));
+    await fetchCuentas(); // Cargar las cuentas
 })
 </script>
 

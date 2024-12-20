@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import MenuVue from './modulos/principal/vistas/MenuVue.vue';
-import { RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 
-
+// Obtén información sobre la ruta actual
+const route = useRoute();
 </script>
 
 <template>
-  <header>
-    <!--Nombre del archivo del nav bar en forma de etiqueta-->
-    <MenuVue/>
-  </header>
-  <!--Las vistas estarn debajo del nav bar-->
-  <RouterView/>
+  <div>
+    <!-- Mostrar el Navbar solo si no estamos en la ruta /home -->
+    <header v-if="!route.meta.hideLayout">
+      <MenuVue />
+    </header>
+
+    <!-- Las vistas estarán debajo del Navbar -->
+    <RouterView />
+  </div>
 </template>

@@ -1,10 +1,10 @@
 <template>
-    <h3>Expense Category</h3>
+    <h3>Spent Category</h3>
     <section class="contenedorinicio">
         <div class="contenedor_botones">
             <RouterLink :to="{ path: '/categoria_gasto/agregar' }">
                 <button class="btn btn-sm boton_accion">
-                    Agregar <i class="fa fa-plus"></i>
+                    Add <i class="fa fa-plus"></i>
                 </button>
             </RouterLink>
             &nbsp;
@@ -32,7 +32,7 @@
         <div v-else v-for="(categoria_gasto, index) in categoria_gastos" :key="index" class="bloque-transaccion">
             <div class="bloque-detalle" id="tablaTransaccion">
                 <!-- <p><strong>ID:</strong> {{ categoria_gasto.id_categoria_gasto }}</p> -->
-                <p><strong>Expense Category: </strong>{{ categoria_gasto.nombre }}</p>
+                <p><strong>Spent Category: </strong>{{ categoria_gasto.nombre }}</p>
             </div>
             <div class="bloque-acciones">
                 <button type="button" class="btn btn-sm btn-outline-primary botonmodificar">

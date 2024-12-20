@@ -1,5 +1,5 @@
 <template>
-    <h3>Expense Users</h3>
+    <h3>Users</h3>
     <section class="contenedorinicio">
         <div class="contenedor_botones">
             <RouterLink :to="{ path: '/hecho_gasto/agregar' }">

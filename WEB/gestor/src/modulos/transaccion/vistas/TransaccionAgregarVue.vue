@@ -3,42 +3,42 @@
         <div class="card">
             <div class="contenedor_formulario">
                 <Form class="formulario" @submit="onTodoBien">
-                    <h4>Agregar Transacción</h4>
+                    <h4>Add Transaction</h4>
                     <div v-if="mensaje == 1" class="alert alert-success mensaje_alerta" role="alert">
-                    Datos agregados con éxito
+                        Data added successfully
                     </div>
                     <div class="mb-3">
-                        ID Cuenta Saliente
+                        Output Account:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <Field name="fk_id_cuenta_saliente" type="number" class="form-control campo_input" v-model="transaccion.fk_id_cuenta_saliente" />
                         <ErrorMessage name="fk_id_cuenta_saliente" class="errorValidacion" />
                     </div>
                     <div class="mb-3">
-                        ID Cuenta Entrante
+                        Input Account:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <Field name="fk_id_cuenta_entrante" type="number" class="form-control campo_input" v-model="transaccion.fk_id_cuenta_entrante" />
                         <ErrorMessage name="fk_id_cuenta_entrante" class="errorValidacion" />
                     </div>
                     <div class="mb-3">
-                        Descripcion
+                        Description: 
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <Field name="descripcion" type="text" class="form-control campo_input" v-model="transaccion.descripcion" />
                         <ErrorMessage name="descripcion" class="errorValidacion" />
                     </div>
                     <div class="mb-3">
-                        Monto
+                        Amount:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <Field name="monto" type="number" class="form-control campo_input" v-model="transaccion.monto" />
                         <ErrorMessage name="monto" class="errorValidacion" />
                     </div>
                     <div class="mb-3">
-                        Fecha
+                        Date:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <Field name="fecha" type="date" class="form-control campo_input" v-model="transaccion.fecha" />
                         <ErrorMessage name="fecha" class="errorValidacion" />
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-primary boton_submit" type="submit">Agregar</button>
+                        <button class="btn btn-primary boton_submit" type="submit">Add</button>
                     </div>
                 </Form>
             </div>

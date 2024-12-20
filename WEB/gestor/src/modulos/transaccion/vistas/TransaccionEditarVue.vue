@@ -3,42 +3,42 @@
         <div class="card">
             <div class="contenedor_formulario">
                 <div class="formulario">
-                    <h4>Editar Transacción</h4>
+                    <h4>Update Transaction</h4>
                     <div v-if="mensaje == 1" class="alert alert-success mensaje_alerta" role="alert" >
-                        Datos actualizados con éxito
+                        Data updated successfully
                     </div>
                     <div class="mb-3">
-                    ID
-                    <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                    <input type="number" class="form-control" v-model="transacciones[0].id_transaccion" disabled>
+                        ID:
+                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
+                        <input type="number" class="form-control" v-model="transacciones[0].id_transaccion" disabled>
                     </div>
                     <div class="mb-3">
-                        ID Cuenta Saliente
+                        Output Account:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="number" class="form-control" v-model="transacciones[0].fk_id_cuenta_saliente">
                     </div>
                     <div class="mb-3">
-                        ID Cuenta Entrante
+                        Input Account:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="number" class="form-control" v-model="transacciones[0].fk_id_cuenta_entrante">
                     </div>
                     <div class="mb-3">
-                        Descripción
+                        Description:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="text" class="form-control" v-model="transacciones[0].descripcion">
                     </div>
                     <div class="mb-3">
-                        Monto
+                        Amount:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="number" class="form-control" v-model="transacciones[0].monto">
                     </div>
                     <div class="mb-3">
-                        Fecha
+                        Date:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="date" class="form-control" v-model="transacciones[0].fecha">
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-primary boton_submit" @click="actualizarTransaccion(transacciones[0])">Actualizar</button>
+                        <button class="btn btn-primary boton_submit" @click="actualizarTransaccion(transacciones[0])">Update</button>
                     </div>
                 </div>
             </div>

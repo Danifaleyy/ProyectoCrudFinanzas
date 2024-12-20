@@ -1,3 +1,5 @@
+import SignInVue from '@/modulos/autentica/vistas/SigninVue.vue'
+import SignUpVue from '@/modulos/autentica/vistas/SignupVue.vue'
 import Categoria_gastoAgregarVue from '@/modulos/categoria_gasto/vistas/Categoria_gastoAgregarVue.vue'
 import Categoria_gastoBorrarVue from '@/modulos/categoria_gasto/vistas/Categoria_gastoBorrarVue.vue'
 import Categoria_gastoEditarVue from '@/modulos/categoria_gasto/vistas/Categoria_gastoEditarVue.vue'
@@ -26,6 +28,7 @@ import Lugar_gastoAgregarVue from '@/modulos/lugar_gasto/vistas/Lugar_gastoAgreg
 import Lugar_gastoBorrarVue from '@/modulos/lugar_gasto/vistas/Lugar_gastoBorrarVue.vue'
 import Lugar_gastoEditarVue from '@/modulos/lugar_gasto/vistas/Lugar_gastoEditarVue.vue'
 import Lugar_gastoVue from '@/modulos/lugar_gasto/vistas/Lugar_gastoVue.vue'
+import HomeVue from '@/modulos/principal/vistas/HomeVue.vue'
 import Tipo_gastoAgregarVue from '@/modulos/tipo_gasto/vistas/Tipo_gastoAgregarVue.vue'
 import Tipo_gastoBorrarVue from '@/modulos/tipo_gasto/vistas/Tipo_gastoBorrarVue.vue'
 import Tipo_gastoEditarVue from '@/modulos/tipo_gasto/vistas/Tipo_gastoEditarVue.vue'
@@ -34,16 +37,70 @@ import TransaccionAgregarVue from '@/modulos/transaccion/vistas/TransaccionAgreg
 import TransaccionBorrarVue from '@/modulos/transaccion/vistas/TransaccionBorrarVue.vue'
 import TransaccionEditarVue from '@/modulos/transaccion/vistas/TransaccionEditarVue.vue'
 import TransaccionVue from '@/modulos/transaccion/vistas/TransaccionVue.vue'
+import MyWalletVue from '@/modulos/principal/vistas/MyWalletVue.vue'
+import { getAuth } from 'firebase/auth'
 import { createRouter, createWebHistory } from 'vue-router'
+import DashboardVue from '@/modulos/principal/vistas/DashboardVue.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+     // Redirección de la raíz (/) a /home
+     {
+      path: '/',
+      redirect: '/home',
+    },
+    // Ruta del home
+    {
+      path: '/home',
+      name: 'home',
+      component: HomeVue,
+      meta: { hideLayout: true },
+    },
+    // Ruta inicio de sesión
+    {
+      path: '/signin',
+      name: 'signin',
+      component: SignInVue,
+      meta: { hideLayout: true },
+    },
+    // Ruta registrar un nuevo usuario
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUpVue,
+      meta: { hideLayout: true },
+    },
+    {
+      path: '/my_wallet',
+      name: 'my_wallet',
+      component: MyWalletVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
+    },
+
+
     //Ruta de cuenta: Inicio
     {
       path: '/cuenta',
       name: 'cuenta',
       component: CuentaVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
     },
     //Ruta de cuenta: Agregar
     {
@@ -70,6 +127,15 @@ const router = createRouter({
       path: '/categoria_ingreso',
       name: 'categoria_ingreso',
       component: Categoria_ingresoVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
     },
     //Ruta de categoria_ingreso: Agregar
     {
@@ -96,6 +162,15 @@ const router = createRouter({
       path: '/categoria_gasto',
       name: 'categoria_gasto',
       component: Categoria_gastoVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
     },
     //Ruta de categoria_gasto: Agregar
     {
@@ -122,6 +197,15 @@ const router = createRouter({
       path: '/tipo_gasto',
       name: 'tipo_gasto',
       component: Tipo_gastoVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
     },
     //Ruta de tipo_gasto: Agregar
     {
@@ -148,6 +232,15 @@ const router = createRouter({
       path: '/lugar_gasto',
       name: 'lugar_gasto',
       component: Lugar_gastoVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
     },
     //Ruta de lugar_gasto: Agregar
     {
@@ -174,6 +267,15 @@ const router = createRouter({
       path: '/hecho_gasto',
       name: 'hecho_gasto',
       component: Hecho_gastoVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
     },
     //Ruta de hecho_gasto: Agregar
     {
@@ -200,6 +302,15 @@ const router = createRouter({
       path: '/ingreso',
       name: 'ingreso',
       component: IngresoVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
     },
     //Ruta de Ingreso: Agregar
     {
@@ -226,6 +337,15 @@ const router = createRouter({
       path: '/gasto',
       name: 'gasto',
       component: GastoVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
     },
     //Ruta de Gasto: Agregar
     {
@@ -252,6 +372,15 @@ const router = createRouter({
       path: '/transaccion',
       name: 'transaccion',
       component: TransaccionVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
     },
     //Ruta de Transaccion: Agregar
     {
@@ -272,24 +401,32 @@ const router = createRouter({
       component: TransaccionBorrarVue,
     },
 
-
-
-    //Ruta del home
+    //Ruta de Transaccion: Inicio
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: DashboardVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
+    },
     /*
     {
       path: '/home',
       name: 'home',
-      component: HomeVue,
+      component: () => import('../modulos/principal/vistas/HomeVue.vue'),
+      meta: { showLayout: false }, // Ocultar navbar y sidebar en Home
     },
     {
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardVue,
-    },
-    {
-      path: '/my_wallet',
-      name: 'my_wallet',
-      component: MyWalletVue,
     },
     {
       path: '/recent_transactions',

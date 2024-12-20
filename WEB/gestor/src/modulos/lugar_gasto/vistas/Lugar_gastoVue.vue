@@ -4,7 +4,7 @@
         <div class="contenedor_botones">
             <RouterLink :to="{ path: '/lugar_gasto/agregar' }">
                 <button class="btn btn-sm boton_accion">
-                    Agregar <i class="fa fa-plus"></i>
+                    Add <i class="fa fa-plus"></i>
                 </button>
             </RouterLink>
             &nbsp;

@@ -32,7 +32,7 @@
         <div v-else v-for="(categoria_ingreso, index) in categoria_ingresos" :key="index" class="bloque-transaccion">
             <div class="bloque-detalle" id="tablaTransaccion">
                 <!--<p><strong>ID:</strong> {{ categoria_ingreso.id_categoria_ingreso }}</p>-->
-                <p><strong>Income Category: </strong> {{ categoria_ingreso.nombre }}</p>
+                <p><strong>Category: </strong> {{ categoria_ingreso.nombre }}</p>
             </div>
             
             <div class="bloque-acciones">

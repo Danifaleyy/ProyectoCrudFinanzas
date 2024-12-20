@@ -3,46 +3,45 @@
         <div class="card">
             <div class="contenedor_formulario">
                 <div class="formulario">
-                    <h4>Borrar Transacción</h4>
+                    <h4>Delete Transaction</h4>
                     <div class="alert alert-warning mensaje_alerta" role="alert">
-                        ¿Seguro que deseas borrar la información?
+                        Are you sure you want to delete the information?
                         <i class="fa fa-warning"></i>
                     </div>
                     <div class="mb-3">
-                    ID
-                    <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                    <input type="number" class="form-control" v-model="transacciones[0].id_transaccion" disabled>
+                        ID:
+                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
+                        <input type="number" class="form-control" v-model="transacciones[0].id_transaccion" disabled>
                     </div>
                     <div class="mb-3">
-                        ID Cuenta Saliente
+                        Output Account:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="number" class="form-control" v-model="transacciones[0].fk_id_cuenta_saliente" disabled>
                     </div>
                     <div class="mb-3">
-                        ID Cuenta Entrante
+                        Input Account:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="number" class="form-control" v-model="transacciones[0].fk_id_cuenta_entrante" disabled>
                     </div>
                     <div class="mb-3">
-                        Descripcion
+                        Description:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="text" class="form-control" v-model="transacciones[0].descripcion" disabled>
                     </div>
                     <div class="mb-3">
-                        Monto
+                        Amount:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="number" class="form-control" v-model="transacciones[0].monto" disabled>
                     </div>
                     <div class="mb-3">
-                        Fecha
+                        Date:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="date" class="form-control" v-model="transacciones[0].fecha" disabled>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-danger boton_submit" @click="borrarTransaccion(transacciones[0])">Borrar</button>
+                        <button class="btn btn-danger boton_submit" @click="borrarTransaccion(transacciones[0])">Delete</button>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>

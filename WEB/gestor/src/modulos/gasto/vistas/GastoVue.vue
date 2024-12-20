@@ -34,13 +34,21 @@
             <div class="bloque-detalle" id="tablaTransaccion">
                 <!-- <p><strong>ID: </strong>{{ gasto.id_gasto }}</p> -->
                 <p><strong>Count: </strong>{{ gasto.fk_id_cuenta }}</p>
-                <p><strong>Expense Category: </strong>{{ gasto.fk_id_categoria_gasto }}</p>
-                <p><strong>Expense Type: </strong>{{ gasto.fk_id_tipo_gasto }}</p>
+                <p><strong>Spent Category: </strong>{{ gasto.fk_id_categoria_gasto }}</p>
+                <p><strong>Spent Type: </strong>{{ gasto.fk_id_tipo_gasto }}</p>
                 <p><strong>Store: </strong>{{ gasto.fk_id_lugar_gasto }}</p>
                 <p><strong>Description: </strong>{{ gasto.descripcion }}</p>
                 <p><strong>Amount: </strong>{{ gasto.monto }}</p>
                 <p><strong>Operation Date: </strong> {{ dayjs(gasto.fecha_operacion).format('DD-MM-YYYY') }}</p>
                 <p><strong>Payment Date: </strong> {{ dayjs(gasto.fecha_pago).format('DD-MM-YYYY') }}</p>
+            </div>
+            <div class="bloque-acciones">
+                <button type="button" class="btn btn-sm btn-outline-primary">
+                    <RouterLink :to="{ path: '/gasto/'+ gasto.id_gasto + '/editar'}"><i class="fa fa-pencil"></i></RouterLink>
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-danger">
+                    <RouterLink :to="{ path: '/gasto/'+ gasto.id_gasto + '/borrar'}"><i class="fa fa-trash"></i></RouterLink>
+                </button>
             </div>
         </div>
     </section>

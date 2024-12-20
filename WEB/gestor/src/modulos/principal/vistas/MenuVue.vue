@@ -64,26 +64,52 @@
       </div>
 
       <div class="sidebar__actions">
-        <button @click="toggleTheme">
+        <button class="sidebar__link" @click="toggleTheme">
           <i :class="['sidebar__theme', themeIcon]">
             <span>Theme</span>
           </i>
         </button>
 
-        <RouterLink to="/logout" class="sidebar__link">
+        <li class="sidebar__link" v-if="usuarioAutenticado">
           <i class="ri-logout-box-r-fill"></i>
-          <span>Log Out</span>
-        </RouterLink>
+          <button @click.prevent="cerrarSesion" class="logout">
+            <span>Log Out</span>
+          </button>
+        </li>
       </div>
     </div>
   </nav>
 
   <!--=============== MAIN ===============-->
   <main :class="['main', { 'left-pd': isSidebarVisible }]" id="main"></main>
+
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+//Boton de cerrar sesion
+import { ref, onMounted } from 'vue';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from 'vue-router';
+
+const usuarioAutenticado = ref(false);
+const auth = getAuth();
+const router = useRouter();
+
+onMounted(() => {
+    onAuthStateChanged(auth, (user) => {
+        usuarioAutenticado.value = !!user;
+    });
+});
+
+const cerrarSesion = async () => {
+    try {
+        await signOut(auth);
+        router.push('/home');
+    } catch (error) {
+        console.log('Error al cerrar sesión', error);
+    }
+};
+
 
 // Estado para mostrar/ocultar el sidebar
 const isSidebarVisible = ref(false)
@@ -107,8 +133,8 @@ const settingsItems = [
   { icon: 'ri-bank-card-fill', label: 'Bank Accounts', route: '/cuenta' },
   { icon: 'ri-money-dollar-circle-fill', label: 'Income', route: '/ingreso' },
   { icon: 'ri-price-tag-3-fill', label: 'Income Category', route: '/categoria_ingreso' },
-  { icon: 'ri-shopping-cart-2-fill', label: 'Expense', route: '/gasto' },
-  { icon: 'ri-price-tag-3-fill', label: 'Expense Category', route: '/categoria_gasto' },
+  { icon: 'ri-shopping-cart-2-fill', label: 'Spent', route: '/gasto' },
+  { icon: 'ri-price-tag-3-fill', label: 'Spent Category', route: '/categoria_gasto' },
   { icon: 'ri-folder-user-fill', label: 'Users', route: '/hecho_gasto' },
   { icon: 'ri-price-tag-fill', label: 'Type Of Expense', route: '/tipo_gasto' },
   { icon: 'ri-store-fill', label: 'Store', route: '/lugar_gasto' }
@@ -151,4 +177,8 @@ onMounted(() => {
 /* Importar estilos externos */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css");
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200..1000&display=swap");
+
+.logout{
+  color: #FB607F;
+}
 </style>

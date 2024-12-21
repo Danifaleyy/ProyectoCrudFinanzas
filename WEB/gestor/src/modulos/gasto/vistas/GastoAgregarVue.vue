@@ -18,7 +18,7 @@
                         <ErrorMessage name="fk_id_cuenta" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
-                        Spent Category:
+                        Category:
                         <!-- Aquí sustituimos el input de número por un menú desplegable -->
                         <select name="fk_id_categoria_gasto" class="form-control campo_input" v-model="gasto.fk_id_categoria_gasto">
                             <option v-for="categoria in categorias" :key="categoria.id_categoria_gasto" :value="categoria.id_categoria_gasto">
@@ -28,7 +28,7 @@
                         <ErrorMessage name="fk_id_categoria_gasto" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
-                        Spent Type:
+                        Type:
                         <!-- Aquí sustituimos el input de número por un menú desplegable -->
                         <select name="fk_id_tipo_gasto" class="form-control campo_input" v-model="gasto.fk_id_tipo_gasto">
                             <option v-for="tipo_gasto in tipo_gastos" :key="tipo_gasto.id_tipo_gasto" :value="tipo_gasto.id_tipo_gasto">
@@ -73,9 +73,13 @@
                     </div>
                     <div class="mb-3">
                         User:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <Field name="fk_id_hecho_gasto" type="number" class="form-control campo_input" v-model="gasto.fk_id_hecho_gasto"/>
-                        <ErrorMessage name="fk_id_hecho_gasto" class="errorValidacion"/>
+                        <!-- Aquí sustituimos el input de número por un menú desplegable -->
+                        <select name="fk_id_hecho_gasto" class="form-control campo_input" v-model="gasto.fk_id_hecho_gasto">
+                            <option v-for="hecho_gasto in hecho_gastos" :key="hecho_gasto.id_hecho_gasto" :value="hecho_gasto.id_hecho_gasto">
+                                {{ hecho_gasto.nombre }}
+                            </option>
+                        </select>
+                        <ErrorMessage name="fk_id_lugar_gasto" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-primar boton_submit" type="submit">Add</button>
@@ -100,6 +104,24 @@ import axios from 'axios';
 //-----------------
 const { agregarGasto, mensaje } = useGasto()
 const routeRedirect = useRouter();
+
+
+
+// Variables para las categorías
+const hecho_gastos = ref<{ id_hecho_gasto: number; nombre: string }[]>([]);
+
+// Obtener categorías desde el backend al montar el componente
+const fetchHecho = async () => {
+    try {
+        const response = await axios.get('http://localhost:3001/api/hecho_gasto/');
+        hecho_gastos.value = response.data; // Guardar categorías en la variable reactiva
+    } catch (error) {
+        console.error('Error al obtener las hecho_gasto:', error);
+    }
+};
+
+// Llamamos a fetchCategorias al montar el componente
+onMounted(fetchHecho);
 
 
 // Variables para las categorías

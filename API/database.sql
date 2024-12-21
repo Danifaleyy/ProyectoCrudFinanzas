@@ -93,3 +93,38 @@ CREATE TABLE transaccion (
   FOREIGN KEY (fk_id_cuenta_saliente) REFERENCES cuenta(id_cuenta),
   FOREIGN KEY (fk_id_cuenta_entrante) REFERENCES cuenta(id_cuenta)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+--Tabla portafolio
+CREATE TABLE portafolio (
+  id_portafolio INT(11) NOT NULL AUTO_INCREMENT,
+  fk_id_instrumento INT(11) NOT NULL,
+  fk_id_tipo_inversion INT(11) NOT NULL,
+  descripcion VARCHAR(50) DEFAULT NULL,
+  monto DECIMAL(10, 2) NOT NULL,
+  tasa DECIMAL(10, 2) NOT NULL,
+  fecha_inicio DATE NOT NULL,
+  fecha_final DATE NOT NULL,
+  comprobante VARCHAR(255) DEFAULT NULL,
+  --Primary Key
+  PRIMARY KEY (id_portafolio),
+  --Forgein Key
+  FOREIGN KEY (fk_id_tipo_inversion) REFERENCES tipo_inversion(id_tipo_inversion),
+  FOREIGN KEY (fk_id_instrumento) REFERENCES instrumento(id_instrumento),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--Tabla Tipo_inversion
+CREATE TABLE tipo_inversion (
+  id_tipo_inversion INT(11) NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(30) DEFAULT NULL,
+  --Primary Key
+  PRIMARY KEY (id_tipo_inversion),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--Tabla Instrumento de inversion
+CREATE TABLE instrumento (
+  id_instrumento INT(11) NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(30) DEFAULT NULL,
+  --Primary Key
+  PRIMARY KEY (id_instrumento),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

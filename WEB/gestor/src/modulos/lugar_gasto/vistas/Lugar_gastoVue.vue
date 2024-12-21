@@ -32,7 +32,7 @@
         <div v-else v-for="(lugar_gasto, index) in lugar_gastos" :key="index" class="bloque-transaccion">
             <div class="bloque-detalle" id="tablaTransaccion">
                 <!-- <p><strong>ID: </strong>{{ lugar_gasto.id_lugar_gasto }}</p> -->
-                <p><strong>Store: </strong>{{ lugar_gasto.nombre }}</p>
+                <p><strong>Name: </strong>{{ lugar_gasto.nombre }}</p>
             </div>
             <div class="bloque-acciones">
                 <button type="button" class="boton_accion_botonmodificar">

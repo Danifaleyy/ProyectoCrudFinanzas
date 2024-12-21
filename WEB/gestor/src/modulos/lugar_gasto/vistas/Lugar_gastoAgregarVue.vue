@@ -8,7 +8,7 @@
                         Data added successfully
                     </div>
                     <div class="mb-3">
-                        Store:
+                        Name:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <Field name="nombre" type="text" class="form-control campo_input" v-model="lugar_gasto.nombre"/>
                         <ErrorMessage name="nombre" class="errorValidacion"/>

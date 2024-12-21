@@ -41,6 +41,18 @@ import MyWalletVue from '@/modulos/principal/vistas/MyWalletVue.vue'
 import { getAuth } from 'firebase/auth'
 import { createRouter, createWebHistory } from 'vue-router'
 import DashboardVue from '@/modulos/principal/vistas/DashboardVue.vue'
+import PortafolioVue from '@/modulos/portafolio/vistas/PortafolioVue.vue'
+import PortafolioAgregarVue from '@/modulos/portafolio/vistas/PortafolioAgregarVue.vue'
+import PortafolioEditarVue from '@/modulos/portafolio/vistas/PortafolioEditarVue.vue'
+import PortafolioBorrarVue from '@/modulos/portafolio/vistas/PortafolioBorrarVue.vue'
+import InstrumentoVue from '@/modulos/instrumento/vistas/InstrumentoVue.vue'
+import InstrumentoEditarVue from '@/modulos/instrumento/vistas/InstrumentoEditarVue.vue'
+import InstrumentoAgregarVue from '@/modulos/instrumento/vistas/InstrumentoAgregarVue.vue'
+import InstrumentoBorrarVue from '@/modulos/instrumento/vistas/InstrumentoBorrarVue.vue'
+import Tipo_inversionBorrarVue from '@/modulos/tipo_inversion/vistas/Tipo_inversionBorrarVue.vue'
+import Tipo_inversionEditarVue from '@/modulos/tipo_inversion/vistas/Tipo_inversionEditarVue.vue'
+import Tipo_inversionAgregarVue from '@/modulos/tipo_inversion/vistas/Tipo_inversionAgregarVue.vue'
+import Tipo_inversionVue from '@/modulos/tipo_inversion/vistas/Tipo_inversionVue.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -416,6 +428,111 @@ const router = createRouter({
         }
       }
     },
+    //Ruta de portafolio: Inicio
+    {
+      path: '/portafolio',
+      name: 'portafolio',
+      component: PortafolioVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
+    },
+    //Ruta de portafolio: Agregar
+    {
+      path: '/portafolio/agregar',
+      name: 'portafolioagregar',
+      component: PortafolioAgregarVue,
+    },
+    //Ruta de portafolio: Editar
+    {
+      path: '/portafolio/:id_portafolio/editar',
+      name: 'portafolioeditar',
+      component: PortafolioEditarVue,
+    },
+    //Ruta de portafolio: Borrar
+    {
+      path: '/portafolio/:id_portafolio/borrar',
+      name: 'portafolioborrar',
+      component: PortafolioBorrarVue,
+    },
+    //Ruta de portafolio: Inicio
+    {
+      path: '/instrumento',
+      name: 'instrumento',
+      component: InstrumentoVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
+    },
+    //Ruta de portafolio: Agregar
+    {
+      path: '/instrumento/agregar',
+      name: 'instrumentoagregar',
+      component: InstrumentoAgregarVue,
+    },
+    //Ruta de portafolio: Editar
+    {
+      path: '/instrumento/:id_instrumento/editar',
+      name: 'instrumentoeditar',
+      component: InstrumentoEditarVue,
+    },
+    //Ruta de portafolio: Borrar
+    {
+      path: '/instrumento/:id_instrumento/borrar',
+      name: 'instrumentoborrar',
+      component: InstrumentoBorrarVue,
+    },
+
+
+
+
+    //Ruta de portafolio: Inicio
+    {
+      path: '/tipo_inversion',
+      name: 'tipo_inversion',
+      component: Tipo_inversionVue,
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser;
+        if (usuario) {
+          next();
+        } else {
+          next('/signin'); // Redirige al login si no hay usuario
+        }
+      }
+    },
+    //Ruta de portafolio: Agregar
+    {
+      path: '/tipo_inversion/agregar',
+      name: 'tipo_inversionagregar',
+      component: Tipo_inversionAgregarVue,
+    },
+    //Ruta de portafolio: Editar
+    {
+      path: '/tipo_inversion/:id_tipo_inversion/editar',
+      name: 'tipo_inversioneditar',
+      component: Tipo_inversionEditarVue,
+    },
+    //Ruta de portafolio: Borrar
+    {
+      path: '/tipo_inversion/:id_tipo_inversion/borrar',
+      name: 'tipo_inversionborrar',
+      component: Tipo_inversionBorrarVue,
+    },
+    /*
+    */
     /*
     {
       path: '/home',

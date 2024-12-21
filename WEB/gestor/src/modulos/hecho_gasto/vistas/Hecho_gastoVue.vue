@@ -32,7 +32,7 @@
         <div v-else v-for="(hecho_gasto, index) in hecho_gastos" :key="index" class="bloque-transaccion">
             <div class="bloque-detalle" id="tablaTransaccion">
                 <!-- <p><strong>ID: </strong>{{ hecho_gasto.id_hecho_gasto }}</p> -->
-                <p><strong>User: </strong>{{ hecho_gasto.nombre }}</p>
+                <p><strong>Name: </strong>{{ hecho_gasto.nombre }}</p>
             </div>
             <div class="bloque-acciones">
                 <button type="button" class="boton_accion_botonmodificar">

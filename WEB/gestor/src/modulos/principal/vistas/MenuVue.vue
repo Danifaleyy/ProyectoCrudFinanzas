@@ -30,7 +30,7 @@
       <!--Seccion para: Ver informacion-->
       <div class="sidebar__content">
         <div>
-          <h3 class="sidebar__title">MANAGE</h3>
+          <h3 class="sidebar__title">INCOME</h3>
           <div class="sidebar__list">
             <RouterLink
               v-for="(item, index) in manageItems"
@@ -47,7 +47,7 @@
 
         <!--Seccion para: Agregar datos-->
         <div>
-          <h3 class="sidebar__title">SETTINGS</h3>
+          <h3 class="sidebar__title">SPENT</h3>
           <div class="sidebar__list">
             <RouterLink
               v-for="(item, index) in settingsItems"
@@ -61,6 +61,39 @@
             </RouterLink>
           </div>
         </div>
+
+        <div>
+          <h3 class="sidebar__title">PORTFOLIO</h3>
+          <div class="sidebar__list">
+            <RouterLink
+              v-for="(item, index) in portfolioItems"
+              :key="index"
+              :to="item.route"
+              :class="['sidebar__link', { 'active-link': activeLink === index + manageItems.length }]"
+              @click="setActiveLink(index + manageItems.length)"
+            >
+              <i :class="item.icon"></i>
+              <span>{{ item.label }}</span>
+            </RouterLink>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="sidebar__title">ANALYSIS</h3>
+          <div class="sidebar__list">
+            <RouterLink
+              v-for="(item, index) in analysisItems"
+              :key="index"
+              :to="item.route"
+              :class="['sidebar__link', { 'active-link': activeLink === index + manageItems.length }]"
+              @click="setActiveLink(index + manageItems.length)"
+            >
+              <i :class="item.icon"></i>
+              <span>{{ item.label }}</span>
+            </RouterLink>
+          </div>
+        </div>
+
       </div>
 
       <div class="sidebar__actions">
@@ -123,21 +156,30 @@ const activeLink = ref(0)
 
 // Datos de navegación
 const manageItems = [
-  { icon: 'ri-pie-chart-2-fill', label: 'Dashboard', route: '/dashboard' },
-  { icon: 'ri-wallet-3-fill', label: 'My Wallet', route: '/my_wallet' },
-  { icon: 'ri-arrow-up-down-line', label: 'Recent Transactions', route: '/recent_transactions' },
+  { icon: 'ri-money-dollar-circle-fill', label: 'Income', route: '/ingreso' },
+  { icon: 'ri-price-tag-3-fill', label: 'Category', route: '/categoria_ingreso' },
+  { icon: 'ri-bank-card-fill', label: 'Bank Accounts', route: '/cuenta' },
+  { icon: 'ri-exchange-box-fill', label: 'Transactions', route: '/transaccion' },
 ]
 
 const settingsItems = [
-  { icon: 'ri-exchange-box-fill', label: 'Transactions', route: '/transaccion' },
-  { icon: 'ri-bank-card-fill', label: 'Bank Accounts', route: '/cuenta' },
-  { icon: 'ri-money-dollar-circle-fill', label: 'Income', route: '/ingreso' },
-  { icon: 'ri-price-tag-3-fill', label: 'Income Category', route: '/categoria_ingreso' },
   { icon: 'ri-shopping-cart-2-fill', label: 'Spent', route: '/gasto' },
-  { icon: 'ri-price-tag-3-fill', label: 'Spent Category', route: '/categoria_gasto' },
+  { icon: 'ri-price-tag-3-fill', label: 'Category', route: '/categoria_gasto' },
   { icon: 'ri-folder-user-fill', label: 'Users', route: '/hecho_gasto' },
-  { icon: 'ri-price-tag-fill', label: 'Type Of Expense', route: '/tipo_gasto' },
+  { icon: 'ri-price-tag-fill', label: 'Type', route: '/tipo_gasto' },
   { icon: 'ri-store-fill', label: 'Store', route: '/lugar_gasto' }
+]
+
+const portfolioItems = [
+{ icon: 'ri-funds-fill', label: 'Portfolio', route: '/portafolio' },
+  { icon: 'ri-bank-fill', label: 'Instrument', route: '/instrumento' },
+  { icon: 'ri-price-tag-3-fill', label: 'Investment Type', route: '/tipo_inversion' }
+]
+
+const analysisItems = [
+  { icon: 'ri-pie-chart-2-fill', label: 'Dashboard', route: '/dashboard' },
+  { icon: 'ri-wallet-3-fill', label: 'My Wallet', route: '/my_wallet' }
+  /*{ icon: 'ri-arrow-up-down-line', label: 'Recent Transactions', route: '/recent_transactions' },*/
 ]
 
 // Función para mostrar/ocultar el sidebar

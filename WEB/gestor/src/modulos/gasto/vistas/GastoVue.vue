@@ -33,9 +33,9 @@
         <div v-else v-for="(gasto, index) in gastos" :key="index" class="bloque-transaccion">
             <div class="bloque-detalle" id="tablaTransaccion">
                 <!-- <p><strong>ID: </strong>{{ gasto.id_gasto }}</p> -->
-                <p><strong>Count: </strong>{{ gasto.fk_id_cuenta }}</p>
-                <p><strong>Spent Category: </strong>{{ gasto.fk_id_categoria_gasto }}</p>
-                <p><strong>Spent Type: </strong>{{ gasto.fk_id_tipo_gasto }}</p>
+                <p><strong>Account: </strong>{{ gasto.fk_id_cuenta }}</p>
+                <p><strong>Category: </strong>{{ gasto.fk_id_categoria_gasto }}</p>
+                <p><strong>Type: </strong>{{ gasto.fk_id_tipo_gasto }}</p>
                 <p><strong>Store: </strong>{{ gasto.fk_id_lugar_gasto }}</p>
                 <p><strong>Description: </strong>{{ gasto.descripcion }}</p>
                 <p><strong>Amount: </strong>{{ gasto.monto }}</p>

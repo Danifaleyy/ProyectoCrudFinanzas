@@ -19,12 +19,12 @@
                         <input type="number" class="form-control" v-model="gastos[0].fk_id_cuenta" disabled>
                     </div>
                     <div class="mb-3">
-                        Spent Category:
+                        Category:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="number" class="form-control" v-model="gastos[0].fk_id_categoria_gasto" disabled>
                     </div>
                     <div class="mb-3">
-                        Spent Type:
+                        Type:
                         <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                         <input type="number" class="form-control" v-model="gastos[0].fk_id_tipo_gasto" disabled>
                     </div>

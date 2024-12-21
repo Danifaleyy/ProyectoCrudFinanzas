@@ -1,5 +1,5 @@
 <template>
-    <h3>Type Of Spent</h3>
+    <h3>Types</h3>
     <section class="contenedorinicio">
         <div class="contenedor_botones">
             <RouterLink :to="{ path: '/tipo_gasto/agregar' }">

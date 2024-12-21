@@ -18,7 +18,7 @@
                         <ErrorMessage name="fk_id_cuenta" class="errorValidacion"/>
                     </div>
                     <div class="mb-3">
-                        Income Category:
+                        Category:
                         <!-- Aquí sustituimos el input de número por un menú desplegable -->
                         <select name="fk_id_categoria_ingreso" class="form-control campo_input" v-model="ingreso.fk_id_categoria_ingreso">
                             <option v-for="categoria in categorias" :key="categoria.id_categoria_ingreso" :value="categoria.id_categoria_ingreso">

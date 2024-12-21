@@ -22,11 +22,20 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        Spent Category:
+                        Category:
                         <!-- Sustituimos el input por un menú desplegable -->
                         <select name="fk_id_categoria_gasto" class="form-control campo_input" v-model="gastos[0].fk_id_categoria_gasto">
                             <option v-for="categoria in categorias" :key="categoria.id_categoria_gasto" :value="categoria.id_categoria_gasto">
                                 {{ categoria.nombre }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        Type:
+                        <!-- Sustituimos el input por un menú desplegable -->
+                        <select name="fk_id_tipo_gasto" class="form-control campo_input" v-model="gastos[0].fk_id_tipo_gasto">
+                            <option v-for="tipo_gasto in tipo_gastos" :key="tipo_gasto.id_tipo_gasto" :value="tipo_gasto.id_tipo_gasto">
+                                {{ tipo_gasto.nombre }}
                             </option>
                         </select>
                     </div>
@@ -61,8 +70,12 @@
                     </div>
                     <div class="mb-3">
                         User:
-                        <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
-                        <input type="number" class="form-control" v-model="gastos[0].fk_id_hecho_gasto">
+                        <!-- Sustituimos el input por un menú desplegable -->
+                        <select name="fk_id_hecho_gasto" class="form-control campo_input" v-model="gastos[0].fk_id_hecho_gasto">
+                            <option v-for="hecho_gasto in hecho_gastos" :key="hecho_gasto.id_hecho_gasto" :value="hecho_gasto.id_hecho_gasto">
+                                {{ hecho_gasto.nombre }}
+                            </option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-primary boton_submit" @click="actualizarGasto(gastos[0])">Update</button>
@@ -86,6 +99,33 @@ let idGasto = 0
 const route = useRoute()
 
 
+// Variables para las cuentas
+const hecho_gastos = ref<{ id_hecho_gasto: number; nombre: string }[]>([]);
+  
+  // Función para obtener cuentas del backend
+  const fetchHecho = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/api/hecho_gasto/');
+      hecho_gastos.value = response.data;
+    } catch (error) {
+      console.error('Error al obtener las hecho_gasto:', error);
+    }
+  };
+
+
+
+// Variables para las cuentas
+const tipo_gastos = ref<{ id_tipo_gasto: number; nombre: string }[]>([]);
+  
+  // Función para obtener cuentas del backend
+  const fetchTipo = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/api/tipo_gasto/');
+      tipo_gastos.value = response.data;
+    } catch (error) {
+      console.error('Error al obtener las tipo_gasto:', error);
+    }
+  };
 
 // Variables para las cuentas
 const lugar_gastos = ref<{ id_lugar_gasto: number; nombre: string }[]>([]);
@@ -140,6 +180,8 @@ onMounted(async () => {
     await fetchCategorias(); // Cargar las categorías
     await fetchCuentas(); // Cargar las cuentas
     await fetchLugar(); // Cargar las cuentas
+    await fetchTipo(); // Cargar las cuentas
+    await fetchHecho(); // Cargar las cuentas
 });
 // ------------------------------
 

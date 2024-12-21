@@ -28,7 +28,7 @@
         <div v-else v-for="(cuenta, index) in cuentas" :key="index" class="bloque-transaccion">
             <div class="bloque-detalle" id="tablaCuenta">
                 <!--<p><strong>ID:</strong> {{ cuenta.id_cuenta }}</p>-->
-                <p><strong>Count: </strong> {{ cuenta.nombre }}</p>
+                <p><strong>Account: </strong> {{ cuenta.nombre }}</p>
             </div>
             <div class="bloque-acciones">
                 <!-- Botón para editar -->

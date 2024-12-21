@@ -13,7 +13,7 @@
                             <input type="number" class="form-control" v-model="lugar_gastos[0].id_lugar_gasto" disabled>
                     </div>
                     <div class="mb-3">
-                            Store:
+                            Name:
                             <!--v-model=: Es para conectarlo, te permite usar ts en HTML-->
                             <input type="text" class="form-control" v-model="lugar_gastos[0].nombre">
                     </div>

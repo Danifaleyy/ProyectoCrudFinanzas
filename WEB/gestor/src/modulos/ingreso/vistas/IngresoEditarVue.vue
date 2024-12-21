@@ -21,7 +21,7 @@
               </select>
             </div>
             <div class="mb-3">
-              Income Category:
+              Category:
               <!-- Sustituimos el input por un menú desplegable -->
               <select name="fk_id_categoria_ingreso" class="form-control campo_input" v-model="ingresos[0].fk_id_categoria_ingreso">
                 <option v-for="categoria in categorias" :key="categoria.id_categoria_ingreso" :value="categoria.id_categoria_ingreso">
@@ -111,6 +111,7 @@
 
 
 <style scoped>
+
     .errorValidacion {
         color: red;
         font-weight: bold;

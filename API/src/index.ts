@@ -10,6 +10,9 @@ import hecho_gastoRutas from './routes/hecho_gastoRutas';
 import gastoRutas from './routes/gastoRutas';
 import ingresoRutas from './routes/ingresoRutas';
 import transaccionRutas from './routes/transaccionRutas';
+import portafolioRutas from './routes/portafolioRutas';
+import instrumentoRutas from './routes/instrumentoRutas';
+import tipo_inversionRutas from './routes/tipo_inversionRutas';
 
 // Creamos la aplicación a través de Express
 const app = express();
@@ -31,6 +34,9 @@ app.use('/api/hecho_gasto', hecho_gastoRutas); // Ruta de hecho_gasto
 app.use('/api/gasto', gastoRutas); // Ruta de gasto
 app.use('/api/ingreso', ingresoRutas); // Ruta de ingreso
 app.use('/api/transaccion', transaccionRutas); // Ruta de transaccion
+app.use('/api/portafolio', portafolioRutas); // Ruta de portafolio
+app.use('/api/instrumento', instrumentoRutas); // Ruta de portafolio
+app.use('/api/tipo_inversion', tipo_inversionRutas); // Ruta de portafolio
 
 // Iniciar el servidor
 app.listen(PUERTO, () => {

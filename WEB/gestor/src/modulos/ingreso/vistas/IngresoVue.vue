@@ -35,7 +35,7 @@
             <div class="bloque-detalle" id="tablaIngreso">
                 <!--<p><strong>ID:</strong> {{ ingreso.id_ingreso }}</p>-->
                 <p><strong>Count: </strong> {{ ingreso.fk_id_cuenta }}</p>
-                <p><strong>Income Category: </strong> {{ ingreso.fk_id_categoria_ingreso }}</p>
+                <p><strong>Category: </strong> {{ ingreso.fk_id_categoria_ingreso }}</p>
                 <p><strong>Description: </strong> {{ ingreso.descripcion }}</p>
                 <p><strong>Amount: </strong> {{ ingreso.monto }}</p>
                 <p><strong>Date: </strong> {{ dayjs(ingreso.fecha_operacion).format('DD-MM-YYYY') }}</p>

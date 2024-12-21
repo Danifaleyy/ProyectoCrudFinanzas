@@ -18,7 +18,7 @@
                         <input type="text" class="form-control" v-model="cuentas[0].nombre">
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-primary boton_submit" @click="actualizarCuenta(cuentas[0])">Actualizar</button>
+                        <button class="btn btn-primary boton_submit" @click="actualizarCuenta(cuentas[0])">Update</button>
                     </div>
                 </div>
             </div>

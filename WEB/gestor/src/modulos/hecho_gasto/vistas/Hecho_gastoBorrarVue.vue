@@ -19,7 +19,7 @@
                         <input type="text" class="form-control" v-model="hecho_gastos[0].nombre" disabled>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-danger" @click="borrarHecho_gasto(hecho_gastos[0])">Delete</button>
+                        <button class="btn btn-danger boton_submit" @click="borrarHecho_gasto(hecho_gastos[0])">Delete</button>
                     </div>
                 </div>
             </div>

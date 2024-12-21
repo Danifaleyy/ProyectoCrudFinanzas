@@ -18,7 +18,7 @@
                     <input type="text" class="form-control" v-model="categoria_ingresos[0].nombre">
                 </div>
                 <div class="mb-3">
-                    <button class="btn btn-primary" @click="actualizarCategoria_ingreso(categoria_ingresos[0])">Update</button>
+                    <button class="btn btn-primary boton_submit" @click="actualizarCategoria_ingreso(categoria_ingresos[0])">Update</button>
                 </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@
                             <input type="text" class="form-control" v-model="lugar_gastos[0].nombre" disabled>
                         </div>
                         <div class="mb-3">
-                            <button class="btn btn-danger boton_submit" @click="borrarLugar_gasto(lugar_gastos[0])">Borrar</button>
+                            <button class="btn btn-danger boton_submit" @click="borrarLugar_gasto(lugar_gastos[0])">Delete</button>
                         </div>
                     </div>
                 </div>

@@ -19,7 +19,7 @@
                         <input type="text" class="form-control" v-model="cuentas[0].nombre" disabled>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-danger" @click="borrarCuenta(cuentas[0])">Delete</button>
+                        <button class="btn btn-danger boton_submit" @click="borrarCuenta(cuentas[0])">Delete</button>
                     </div>
                 </div>
             </div>
